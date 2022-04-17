@@ -9,7 +9,7 @@ const App = () => {
       setPoints(res.data);
     });
   }, []);
-
+  console.log("in app", points);
   return (
     <div>
       <Map points={points} setPoints={setPoints} />

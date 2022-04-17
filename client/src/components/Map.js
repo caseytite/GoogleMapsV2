@@ -71,7 +71,7 @@ const Map = (props) => {
     // setMarker([...otherMarkers, currentMarker]);
     console.log("update marker ");
     axios
-      .post("http://localhost:3009/user", { title, description, lat, lng })
+      .post("/user", { title, description, lat, lng })
       .then((res) => setPoints([res.data]));
 
     console.log("points after", points);

@@ -50,7 +50,7 @@ app.post("/user", (req, res) => {
       req.body.description,
       req.body.lat.toString(),
       req.body.lng.toString(),
-      "pizza",
+      req.body.title,
       "pizza",
     ]
   ).then((data) => {
