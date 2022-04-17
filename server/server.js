@@ -77,6 +77,11 @@ app.post("/login", (req, res) => {
     .catch((err) => res.json({ error: err.message }));
 });
 
+app.post("/logout", (req, res) => {
+  req.session = null;
+  res.redirect("/");
+});
+
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}!`);
 });
