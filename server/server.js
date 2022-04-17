@@ -30,18 +30,31 @@ app.use(
 );
 
 app.get("/user", (req, res) => {
+  console.log("the get");
   db.query(
     `SELECT * FROM locations 
     WHERE user_id = $1;`,
     [1]
   ).then((data) => res.json(data.rows));
 });
+
 app.post("/user", (req, res) => {
+  console.log("the posts");
+  console.log(req.body);
+
   db.query(
-    `INSERT INTO locations (user_id,created,description,lat,long,tags)
-    VALUES ($1,$2,$3,$4,$5,$6) RETURNING *`
+    `INSERT INTO locations (user_id,time,description,lat,lng,title,tags)
+    VALUES ($1,now(),$2,$3,$4,$5,$6) RETURNING *`,
+    [
+      1,
+      req.body.description,
+      req.body.lat.toString(),
+      req.body.lng.toString(),
+      "pizza",
+      "pizza",
+    ]
   ).then((data) => {
-    res.json({ data: data.rows });
+    console.log("data", data.rows);
   });
 });
 

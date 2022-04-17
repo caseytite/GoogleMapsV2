@@ -11,6 +11,7 @@ import { formatRelative, set } from "date-fns";
 import mapStyles from "../mapStyles";
 import "@reach/combobox/styles.css";
 import "../styles/Map.css";
+import axios from "axios";
 
 const mapContainerStyle = {
   width: "100vw",
@@ -27,40 +28,53 @@ const options = {
 };
 
 const Map = (props) => {
+  const { points, setPoints } = props;
+  console.log("points", points);
   const [libraries] = useState(["places"]);
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
   });
-
-  const [markers, setMarker] = useState([]);
+  const [markers, setMarker] = useState(points);
   const [info, setInfo] = useState(null);
   const [addDescription, setAddDescription] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  console.log("component re render");
 
-  const onMapClick = useCallback((event) => {
-    setMarker((prev) => [
-      ...prev,
-      {
-        lat: event.latLng.lat(),
-        lng: event.latLng.lng(),
-        time: new Date(),
-        description,
-        title,
-      },
-    ]);
-    setAddDescription(false);
-  }, []);
+  const onMapClick = useCallback(
+    (event) => {
+      console.log("set points", points);
+      console.log("set marker", markers);
+      setMarker((prev) => [
+        ...prev,
+        {
+          lat: event.latLng.lat(),
+          lng: event.latLng.lng(),
+          time: new Date(),
+          description,
+          title,
+        },
+      ]);
+      setAddDescription(false);
+    },
+    [points]
+  );
 
-  const updateMarker = (t, d) => {
+  const updateMarker = (title, description, lat, lng) => {
+    console.log("points before", points);
     const currentMarker = markers.find((marker) => marker.time === info.time);
     const otherMarkers = markers.filter((marker) => marker.time !== info.time);
+    currentMarker.description = description;
+    currentMarker.title = title;
+    // setPoints([...points, currentMarker]);
+    // setMarker([...otherMarkers, currentMarker]);
+    console.log("update marker ");
+    axios
+      .post("http://localhost:3009/user", { title, description, lat, lng })
+      .then((res) => setPoints([res.data]));
 
-    currentMarker.description = d;
-    currentMarker.title = t;
-    setMarker([...otherMarkers, currentMarker]);
-
+    console.log("points after", points);
     setAddDescription(false);
     setTitle("");
     setDescription("");
@@ -94,8 +108,11 @@ const Map = (props) => {
       >
         {markers.map((marker) => (
           <Marker
-            key={marker.time.toISOString()}
-            position={{ lat: marker.lat, lng: marker.lng }}
+            key={marker.time}
+            position={{
+              lat: marker.lat,
+              lng: marker.lng,
+            }}
             icon={{
               url: "/hand-point-right-solid.svg",
               scaledSize: new window.google.maps.Size(20, 20),
@@ -120,10 +137,10 @@ const Map = (props) => {
               {!addDescription && (
                 <div>
                   <h2>{!info.title ? "Your new pin!" : info.title} </h2>
-                  <p>Created {formatRelative(info.time, new Date())}</p>
+                  {/* <p>Created {formatRelative(info.time, new Date())}</p> */}
                   {info.description && <p>{info.description}</p>}
                   <button onClick={() => setAddDescription(true)}>
-                    Edit Details
+                    Save Details
                   </button>
                 </div>
               )}
@@ -141,8 +158,12 @@ const Map = (props) => {
                     placeholder="Description"
                     onChange={(e) => setDescription(e.target.value)}
                   ></input>
-                  <button onClick={() => updateMarker(title, description)}>
-                    Add Details
+                  <button
+                    onClick={() =>
+                      updateMarker(title, description, info.lat, info.lng)
+                    }
+                  >
+                    Save Points
                   </button>
                 </div>
               )}
