@@ -30,7 +30,9 @@ app.use(
 );
 
 app.get("/", (req, res) => {
-  db.query("SELECT * FROM users;").then((data) => res.json(data.rows));
+  db.query("SELECT * FROM users JOIN locations on users.id = user_id;").then(
+    (data) => res.json(data.rows)
+  );
 });
 
 app.listen(PORT, () => {
