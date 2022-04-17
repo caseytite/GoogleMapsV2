@@ -32,7 +32,8 @@ app.use(
 app.get("/user", (req, res) => {
   console.log("the get");
   db.query(
-    `SELECT * FROM locations 
+    `SELECT * FROM locations
+    join users on users.id = user_id 
     WHERE user_id = $1;`,
     [1]
   ).then((data) => res.json(data.rows));

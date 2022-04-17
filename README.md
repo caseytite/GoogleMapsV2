@@ -1,6 +1,9 @@
 # Google maps!
 
-A basic google maps project built with React where a user can drop pins, search for places and if they got lost, locate themselves!
+A google maps project extending off my other Maps project.
+Built with React, User's can save pins, search for places and if they get lost, locate themselves!
+
+Will be adding log in/out functionality, searchable users pins, and ability to edit or delete current pins.
 
 ###### This project was done with the help of [this video](https://www.youtube.com/watch?v=WZcxJGmLbSo)
 
