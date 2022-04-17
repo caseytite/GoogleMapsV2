@@ -31,11 +31,18 @@ app.use(
 
 app.get("/user", (req, res) => {
   db.query(
-    `SELECT * FROM users 
-    JOIN locations on users.id = user_id 
-    WHERE users.id = $1;`,
+    `SELECT * FROM locations 
+    WHERE user_id = $1;`,
     [1]
   ).then((data) => res.json(data.rows));
+});
+app.post("/user", (req, res) => {
+  db.query(
+    `INSERT INTO locations (user_id,created,description,lat,long,tags)
+    VALUES ($1,$2,$3,$4,$5,$6) RETURNING *`
+  ).then((data) => {
+    res.json({ data: data.rows });
+  });
 });
 
 app.listen(PORT, () => {

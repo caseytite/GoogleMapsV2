@@ -12,10 +12,10 @@ CREATE TABLE users (
 CREATE TABLE locations (
   id SERIAL PRIMARY KEY NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  created TIMESTAMP,
-  description VARCHAR(255) NOT NULL,
+  time TIMESTAMP,
+  description VARCHAR(255),
   lat VARCHAR(255) NOT NULL,
-  long VARCHAR(255) NOT NULL,
-  tags VARCHAR(255)
-  
+  lng VARCHAR(255) NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  tags VARCHAR(255) 
 );

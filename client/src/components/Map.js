@@ -37,7 +37,7 @@ const Map = (props) => {
   const [info, setInfo] = useState(null);
   const [addDescription, setAddDescription] = useState(false);
   const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
+  const [description, setDescription] = useState("");
 
   const onMapClick = useCallback((event) => {
     setMarker((prev) => [
@@ -46,7 +46,7 @@ const Map = (props) => {
         lat: event.latLng.lat(),
         lng: event.latLng.lng(),
         time: new Date(),
-        desc,
+        description,
         title,
       },
     ]);
@@ -57,13 +57,13 @@ const Map = (props) => {
     const currentMarker = markers.find((marker) => marker.time === info.time);
     const otherMarkers = markers.filter((marker) => marker.time !== info.time);
 
-    currentMarker.desc = d;
+    currentMarker.description = d;
     currentMarker.title = t;
     setMarker([...otherMarkers, currentMarker]);
 
     setAddDescription(false);
     setTitle("");
-    setDesc("");
+    setDescription("");
   };
 
   const mapReference = useRef();
@@ -121,7 +121,7 @@ const Map = (props) => {
                 <div>
                   <h2>{!info.title ? "Your new pin!" : info.title} </h2>
                   <p>Created {formatRelative(info.time, new Date())}</p>
-                  {info.desc && <p>{info.desc}</p>}
+                  {info.description && <p>{info.description}</p>}
                   <button onClick={() => setAddDescription(true)}>
                     Edit Details
                   </button>
@@ -137,11 +137,11 @@ const Map = (props) => {
                   ></input>
                   <h3>Add Description</h3>
                   <input
-                    value={desc}
+                    value={description}
                     placeholder="Description"
-                    onChange={(e) => setDesc(e.target.value)}
+                    onChange={(e) => setDescription(e.target.value)}
                   ></input>
-                  <button onClick={() => updateMarker(title, desc)}>
+                  <button onClick={() => updateMarker(title, description)}>
                     Add Details
                   </button>
                 </div>
