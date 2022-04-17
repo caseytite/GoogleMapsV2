@@ -6,6 +6,7 @@ import {
   useLoadScript,
   Marker,
   InfoWindow,
+  Data,
 } from "@react-google-maps/api";
 import { formatRelative, set } from "date-fns";
 import mapStyles from "../mapStyles";
@@ -159,7 +160,7 @@ const Map = (props) => {
               {!addDescription && (
                 <div>
                   <h2>{!info.title ? "Your new pin!" : info.title} </h2>
-                  {/* <p>Created {formatRelative(info.time, new Date())}</p> */}
+                  <p>Created {new Date(info.time).toDateString()}</p>
                   {info.description && <p>{info.description}</p>}
                   <button onClick={() => setAddDescription(true)}>
                     Details
