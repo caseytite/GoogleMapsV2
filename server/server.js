@@ -11,9 +11,9 @@ const cookieSession = require("cookie-session");
 
 // database
 const { Pool } = require("pg");
-// const dbParams = require("./lib/db.js");
-// const db = new Pool(dbParams);
-// db.connect();
+const dbParams = require("./lib/db.js");
+const db = new Pool(dbParams);
+db.connect();
 
 const app = express();
 
@@ -28,6 +28,10 @@ app.use(
     keys: ["chicken", "horse", "cat"],
   })
 );
+
+app.get("/", (req, res) => {
+  db.query("SELECT * FROM users;").then((data) => res.json(data.rows));
+});
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}!`);
