@@ -1,20 +1,28 @@
 import { useState } from "react";
 import axios from "axios";
+import Button from "./Button";
+import { useHistory } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useHistory();
   const handleLogin = (e) => {
     e.preventDefault();
     console.log("email:", email, "password:", password);
     if (email && password) {
       axios
         .post("/login", { email, password })
-        .then((res) => {})
-        .then((response) => {})
+        .then((res) => {
+          console.log("login res", res.data.user.id);
+          localStorage.setItem("userId", res.data.user.id);
+        })
+        .then(() => {
+          console.log("success");
+          navigate.push("/map");
+        })
         .catch((err) => console.log("Login Error:", err.message));
     }
-    console.log("success");
   };
   return (
     <div className="form-container">
@@ -33,7 +41,7 @@ const Login = () => {
           type="password"
           autoComplete="on"
         />
-        <button onClick={(e) => handleLogin(e)}>Sign in</button>
+        <Button onClick={(e) => handleLogin(e)}>Sign in</Button>
       </form>
     </div>
   );

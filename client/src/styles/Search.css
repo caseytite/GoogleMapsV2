@@ -1,11 +1,12 @@
-.search{
+.search {
   position: absolute;
-  top: 1rem;
+  /* top: 1rem; */
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
   max-width: 400px;
   z-index: 10;
+  margin-top: 1em;
 }
 .search input {
   padding: 0.5rem;
@@ -15,11 +16,10 @@
   border: none;
 }
 
-.search input:focus{
+.search input:focus {
   outline: none;
 }
-.search input:hover{
+.search input:hover {
   border: 1px solid black;
   box-shadow: 3px 3px #888888;
 }
-

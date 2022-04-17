@@ -8,6 +8,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import Map from "./components/Map";
 import Login from "./components/Login";
+import Header from "./components/Header";
 
 // ReactDOM.render(
 //   <React.StrictMode>
@@ -19,12 +20,16 @@ const rootElement = document.getElementById("root");
 render(
   <BrowserRouter>
     <ScrollToTop />
+    <Header />
     <Switch>
       <Route exact path="/">
-        <App />
+        <h1>Maps</h1>
       </Route>
       <Route path="/login">
         <Login />
+      </Route>
+      <Route path="/map">
+        <App />
       </Route>
       {/* <Route path="/login" element={<Login />} /> */}
     </Switch>

@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Map from "./components/Map";
 import axios from "axios";
+import "./App.css";
 const App = () => {
   const [points, setPoints] = useState([]);
   useEffect(() => {
@@ -11,7 +12,7 @@ const App = () => {
   }, []);
   console.log("in app", points);
   return (
-    <div>
+    <div className="map-page">
       <Map points={points} setPoints={setPoints} />
       {/* <h1>{points[0].first_name}'s Locations</h1> */}
     </div>
