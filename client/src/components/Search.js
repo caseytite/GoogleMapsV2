@@ -1,17 +1,16 @@
-import React, { useCallback } from 'react';
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
-} from 'use-places-autocomplete';
+} from "use-places-autocomplete";
 import {
   Combobox,
   ComboboxInput,
   ComboboxPopover,
   ComboboxList,
   ComboboxOption,
-} from '@reach/combobox';
-import '@reach/combobox/styles.css';
-import './Search.css';
+} from "@reach/combobox";
+import "@reach/combobox/styles.css";
+import "../styles/Search.css";
 
 const Search = (props) => {
   const { moveTo } = props;
@@ -39,7 +38,7 @@ const Search = (props) => {
             const { lat, lng } = await getLatLng(results[0]);
             moveTo({ lat, lng });
           } catch (error) {
-            console.log('error');
+            console.log("error");
           }
         }}
       >
@@ -49,11 +48,11 @@ const Search = (props) => {
             setValue(e.target.value);
           }}
           disabled={!ready}
-          placeholder={'Enter an address'}
+          placeholder={"Enter an address"}
         />
         <ComboboxPopover>
-          <ComboboxList >
-            {status === 'OK' &&
+          <ComboboxList>
+            {status === "OK" &&
               data.map(({ place_id, description }) => (
                 <ComboboxOption key={place_id} value={description} />
               ))}
