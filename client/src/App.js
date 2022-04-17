@@ -13,7 +13,7 @@ const App = () => {
   return (
     <div>
       <Map points={points} setPoints={setPoints} />
-      <h1>{points[0].first_name}'s Locations</h1>
+      {/* <h1>{points[0].first_name}'s Locations</h1> */}
     </div>
   );
 };

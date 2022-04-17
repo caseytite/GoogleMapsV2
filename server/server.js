@@ -35,7 +35,7 @@ app.get("/user", (req, res) => {
     `SELECT * FROM locations
     join users on users.id = user_id 
     WHERE user_id = $1;`,
-    [1]
+    [req.session.id]
   ).then((data) => res.json(data.rows));
 });
 
@@ -47,7 +47,7 @@ app.post("/user", (req, res) => {
     `INSERT INTO locations (user_id,time,description,lat,lng,title,tags)
     VALUES ($1,now(),$2,$3,$4,$5,$6) RETURNING *`,
     [
-      1,
+      req.session.id,
       req.body.description,
       req.body.lat.toString(),
       req.body.lng.toString(),
@@ -57,6 +57,24 @@ app.post("/user", (req, res) => {
   ).then((data) => {
     console.log("data", data.rows);
   });
+});
+
+app.post("/login", (req, res) => {
+  db.query(
+    `SELECT * FROM users
+    WHERE email = $1
+    AND password = $2`,
+    [req.body.email, req.body.password]
+  )
+    .then((data) => {
+      const user = data.rows;
+      req.session.id = user[0].id;
+      res.json({
+        data: data.rows,
+        user: user[0],
+      });
+    })
+    .catch((err) => res.json({ error: err.message }));
 });
 
 app.listen(PORT, () => {
