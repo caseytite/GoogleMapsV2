@@ -30,7 +30,6 @@ app.use(
 );
 
 app.get("/user", (req, res) => {
-  console.log("the get");
   db.query(
     `SELECT * FROM locations
     join users on users.id = user_id 
@@ -40,9 +39,6 @@ app.get("/user", (req, res) => {
 });
 
 app.post("/user", (req, res) => {
-  console.log("the posts");
-  console.log(req.body);
-
   db.query(
     `INSERT INTO locations (user_id,time,description,lat,lng,title,tags)
     VALUES ($1,now(),$2,$3,$4,$5,$6) RETURNING *`,

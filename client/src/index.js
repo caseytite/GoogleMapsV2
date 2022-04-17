@@ -16,7 +16,7 @@ render(
       <Header />
       <Switch>
         <Route exact path="/">
-          <h1>Maps</h1>
+          <h1>Welcome!</h1>
         </Route>
         <Route path="/login">
           <Login />

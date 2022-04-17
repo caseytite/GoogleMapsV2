@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import Button from "./Button";
+import Input from "./Input";
 import { useHistory } from "react-router-dom";
 
 const Login = () => {
@@ -9,16 +10,13 @@ const Login = () => {
   const navigate = useHistory();
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log("email:", email, "password:", password);
     if (email && password) {
       axios
         .post("/login", { email, password })
         .then((res) => {
-          console.log("login res", res.data.user.id);
           localStorage.setItem("userId", res.data.user.id);
         })
         .then(() => {
-          console.log("success");
           navigate.push("/map");
         })
         .catch((err) => console.log("Login Error:", err.message));
@@ -28,16 +26,16 @@ const Login = () => {
     <div className="form-container">
       <form action="" onSubmit={handleLogin}>
         <label htmlFor="email">Email</label>
-        <input
+        <Input
           value={email}
           type="text"
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={setEmail}
           autoComplete="on"
         />
         <label htmlFor="password">Password</label>
-        <input
+        <Input
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={setPassword}
           type="password"
           autoComplete="on"
         />

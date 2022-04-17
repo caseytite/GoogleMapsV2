@@ -2,25 +2,26 @@ import Button from "./Button";
 import "../styles/Header.css";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import LoggedInUser from "../context/AuthContext";
+import { is } from "date-fns/locale";
 
 const Header = (props) => {
   const navigate = useHistory();
   const context = useContext(LoggedInUser);
   const { userId } = context;
+  const [active, setActive] = useState(false);
 
   const isLoggedIn = userId ? true : false;
-  console.log("isLoggedIn", isLoggedIn);
-  console.log("context", userId);
 
   const goToLogin = () => {
+    setActive(true);
     navigate.push("/login");
   };
 
   const handleLogout = () => {
     localStorage.clear();
-
+    setActive(false);
     axios.post("/logout");
 
     navigate.push("/");

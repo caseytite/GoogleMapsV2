@@ -10,7 +10,6 @@ const App = () => {
       setPoints(res.data);
     });
   }, []);
-  console.log("in app", points);
   return (
     <div className="map-page">
       <Map points={points} setPoints={setPoints} />

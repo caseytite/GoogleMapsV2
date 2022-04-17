@@ -13,6 +13,7 @@ import mapStyles from "../mapStyles";
 import "@reach/combobox/styles.css";
 import "../styles/Map.css";
 import axios from "axios";
+import Input from "./Input";
 
 const mapContainerStyle = {
   width: "100vw",
@@ -28,9 +29,8 @@ const options = {
   zoomControl: true,
 };
 
-const Map = (props) => {
+const Map = React.memo((props) => {
   const { points, setPoints } = props;
-  console.log("points", points);
   const [libraries] = useState(["places"]);
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -41,13 +41,9 @@ const Map = (props) => {
   const [addDescription, setAddDescription] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  console.log("component re render");
 
   const onMapClick = useCallback((event) => {
-    console.log("set points", points);
-    console.log("set marker", markers);
     setMarker((prev) => {
-      console.log("prev", prev);
       return [
         ...prev,
         {
@@ -63,19 +59,16 @@ const Map = (props) => {
   }, []);
 
   const updateMarker = (title, description, lat, lng) => {
-    console.log("points before", points);
     const currentMarker = markers.find((marker) => marker.time === info.time);
     const otherMarkers = markers.filter((marker) => marker.time !== info.time);
     currentMarker.description = description;
     currentMarker.title = title;
     // setPoints([...points, currentMarker]);
     // setMarker([...otherMarkers, currentMarker]);
-    console.log("update marker ");
     axios
       .post("/user", { title, description, lat, lng })
       .then((res) => setPoints([res.data]));
 
-    console.log("points after", points);
     setAddDescription(false);
     setTitle("");
     setDescription("");
@@ -113,12 +106,12 @@ const Map = (props) => {
       }}
     />
   ));
-  const pointSpots = points.map((marker) => (
+  const pointSpots = points.map((point) => (
     <Marker
-      key={marker.time}
+      key={point.time}
       position={{
-        lat: +marker.lat,
-        lng: +marker.lng,
+        lat: +point.lat,
+        lng: +point.lng,
       }}
       icon={{
         url: "/hand-point-right-solid.svg",
@@ -128,7 +121,7 @@ const Map = (props) => {
       }}
       animation={2}
       onClick={() => {
-        setInfo(marker);
+        setInfo(point);
       }}
     />
   ));
@@ -163,30 +156,30 @@ const Map = (props) => {
                   <p>Created {new Date(info.time).toDateString()}</p>
                   {info.description && <p>{info.description}</p>}
                   <button onClick={() => setAddDescription(true)}>
-                    Details
+                    Add Details
                   </button>
                 </div>
               )}
               {addDescription && (
                 <div className="inputs">
                   <h3>Add Title</h3>
-                  <input
+                  <Input
                     value={title}
-                    placeholder="Title"
-                    onChange={(e) => setTitle(e.target.value)}
-                  ></input>
+                    onChange={setTitle}
+                    placeholder={"Title"}
+                  />
                   <h3>Add Description</h3>
-                  <input
+                  <Input
                     value={description}
-                    placeholder="Description"
-                    onChange={(e) => setDescription(e.target.value)}
-                  ></input>
+                    onChange={setDescription}
+                    placeholder={"Description"}
+                  />
                   <button
                     onClick={() =>
                       updateMarker(title, description, info.lat, info.lng)
                     }
                   >
-                    Save Points
+                    Save
                   </button>
                 </div>
               )}
@@ -196,6 +189,6 @@ const Map = (props) => {
       </GoogleMap>
     </div>
   );
-};
+});
 
 export default Map;
