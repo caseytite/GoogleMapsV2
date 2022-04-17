@@ -7,3 +7,9 @@
   font-size: 20px;
   cursor: pointer;
 }
+.button:hover {
+  width: 95px;
+  height: 38px;
+  font-size: 19px;
+  margin-right: 2px;
+}

@@ -48,7 +48,7 @@ const Search = (props) => {
             setValue(e.target.value);
           }}
           disabled={!ready}
-          placeholder={"Enter an address"}
+          placeholder={"Find a Location"}
         />
         <ComboboxPopover>
           <ComboboxList>
