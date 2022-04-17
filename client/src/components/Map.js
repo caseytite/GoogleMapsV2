@@ -15,7 +15,7 @@ import axios from "axios";
 
 const mapContainerStyle = {
   width: "100vw",
-  height: "100vh",
+  height: "50vh",
 };
 const defaultLocation = {
   lat: 48.428421,
@@ -42,11 +42,12 @@ const Map = (props) => {
   const [description, setDescription] = useState("");
   console.log("component re render");
 
-  const onMapClick = useCallback(
-    (event) => {
-      console.log("set points", points);
-      console.log("set marker", markers);
-      setMarker((prev) => [
+  const onMapClick = useCallback((event) => {
+    console.log("set points", points);
+    console.log("set marker", markers);
+    setMarker((prev) => {
+      console.log("prev", prev);
+      return [
         ...prev,
         {
           lat: event.latLng.lat(),
@@ -55,11 +56,10 @@ const Map = (props) => {
           description,
           title,
         },
-      ]);
-      setAddDescription(false);
-    },
-    [points]
-  );
+      ];
+    });
+    setAddDescription(false);
+  }, []);
 
   const updateMarker = (title, description, lat, lng) => {
     console.log("points before", points);
@@ -93,6 +93,45 @@ const Map = (props) => {
   if (loadError) return "Error on map load";
   if (!isLoaded) return "Loading maps";
 
+  const marks = markers.map((marker) => (
+    <Marker
+      key={marker.time}
+      position={{
+        lat: +marker.lat,
+        lng: +marker.lng,
+      }}
+      icon={{
+        url: "/hand-point-right-solid.svg",
+        scaledSize: new window.google.maps.Size(20, 20),
+        origin: new window.google.maps.Point(0, 0),
+        anchor: new window.google.maps.Point(22, 5),
+      }}
+      animation={2}
+      onClick={() => {
+        setInfo(marker);
+      }}
+    />
+  ));
+  const pointSpots = points.map((marker) => (
+    <Marker
+      key={marker.time}
+      position={{
+        lat: +marker.lat,
+        lng: +marker.lng,
+      }}
+      icon={{
+        url: "/hand-point-right-solid.svg",
+        scaledSize: new window.google.maps.Size(20, 20),
+        origin: new window.google.maps.Point(0, 0),
+        anchor: new window.google.maps.Point(22, 5),
+      }}
+      animation={2}
+      onClick={() => {
+        setInfo(marker);
+      }}
+    />
+  ));
+
   return (
     <div>
       <Search moveTo={moveTo} />
@@ -106,28 +145,11 @@ const Map = (props) => {
         onLoad={onMapLoad}
         options={options}
       >
-        {markers.map((marker) => (
-          <Marker
-            key={marker.time}
-            position={{
-              lat: marker.lat,
-              lng: marker.lng,
-            }}
-            icon={{
-              url: "/hand-point-right-solid.svg",
-              scaledSize: new window.google.maps.Size(20, 20),
-              origin: new window.google.maps.Point(0, 0),
-              anchor: new window.google.maps.Point(22, 5),
-            }}
-            animation={2}
-            onClick={() => {
-              setInfo(marker);
-            }}
-          />
-        ))}
+        {marks}
+        {pointSpots}
         {info ? (
           <InfoWindow
-            position={{ lat: info.lat, lng: info.lng }}
+            position={{ lat: +info.lat, lng: +info.lng }}
             onCloseClick={() => {
               setInfo(null);
               setAddDescription(false);
@@ -140,7 +162,7 @@ const Map = (props) => {
                   {/* <p>Created {formatRelative(info.time, new Date())}</p> */}
                   {info.description && <p>{info.description}</p>}
                   <button onClick={() => setAddDescription(true)}>
-                    Save Details
+                    Details
                   </button>
                 </div>
               )}
