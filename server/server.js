@@ -29,10 +29,13 @@ app.use(
   })
 );
 
-app.get("/", (req, res) => {
-  db.query("SELECT * FROM users JOIN locations on users.id = user_id;").then(
-    (data) => res.json(data.rows)
-  );
+app.get("/user", (req, res) => {
+  db.query(
+    `SELECT * FROM users 
+    JOIN locations on users.id = user_id 
+    WHERE users.id = $1;`,
+    [1]
+  ).then((data) => res.json(data.rows));
 });
 
 app.listen(PORT, () => {
