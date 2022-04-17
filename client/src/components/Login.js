@@ -2,11 +2,13 @@ import { useState } from "react";
 import axios from "axios";
 import Button from "./Button";
 import Input from "./Input";
+import "../styles/Login.css";
 import { useHistory } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useHistory();
   const handleLogin = (e) => {
     e.preventDefault();
@@ -19,12 +21,15 @@ const Login = () => {
         .then(() => {
           navigate.push("/map");
         })
-        .catch((err) => console.log("Login Error:", err.message));
+        .catch((err) => {
+          setError("Incorrect Email or Password");
+          // console.log("Login Error:", err.message);
+        });
     }
   };
   return (
     <div className="form-container">
-      <form action="" onSubmit={handleLogin}>
+      <form className="login" action="" onSubmit={handleLogin}>
         <label htmlFor="email">Email</label>
         <Input
           value={email}
@@ -41,6 +46,7 @@ const Login = () => {
         />
         <Button onClick={(e) => handleLogin(e)}>Sign in</Button>
       </form>
+      {error && <h3 className="error">{error}</h3>}
     </div>
   );
 };
