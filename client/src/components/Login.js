@@ -36,7 +36,7 @@ const Login = () => {
           type="text"
           onChange={setEmail}
           autoComplete="on"
-          placeholder={"email@maps.com"}
+          placeholder={"Email@maps.com"}
         />
         <label htmlFor="password">Password</label>
         <Input
@@ -44,7 +44,7 @@ const Login = () => {
           onChange={setPassword}
           type="password"
           autoComplete="on"
-          placeholder={"password"}
+          placeholder={"Password"}
         />
         <Button onClick={(e) => handleLogin(e)}>Sign in</Button>
       </form>
