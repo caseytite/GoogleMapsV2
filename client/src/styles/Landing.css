@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   padding-top: 200px;
-  color: whitesmoke;
+  color: var(--std-text);
   font-size: x-large;
 }
 .bg-img {

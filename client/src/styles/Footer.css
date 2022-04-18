@@ -6,7 +6,7 @@
   bottom: 0;
   width: 100%;
   height: 60px;
-  background-color: hsl(198deg 100% 43%);
+  background-color: var(--header-blue);
 }
 .footer-logo {
   display: flex;

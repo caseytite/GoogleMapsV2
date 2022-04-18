@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   margin-top: 20px;
-  color: whitesmoke;
+  color: var(--std-text);
 }
 .reg-form > h1 {
   font-size: xxx-large;
@@ -20,8 +20,8 @@
   margin-bottom: 1em;
   height: 30px;
   font-size: larger;
-  border-radius: 5px;
-  border: 1px solid black;
+  border-radius: var(--border-radius);
+  border: var(--input-border);
   padding: 3px 10px;
 }
 .reg-form > label {
@@ -30,11 +30,9 @@
   font-size: xx-large;
   margin-left: -25px;
   margin-bottom: 5px;
-  /* color: whitesmoke; */
 }
 .reg-form > button {
   display: inline-block;
   align-self: flex-start;
   margin-left: -25px;
-  /* color: whitesmoke; */
 }

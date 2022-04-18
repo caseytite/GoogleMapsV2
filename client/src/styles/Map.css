@@ -20,8 +20,6 @@
 
 .point-search {
   position: absolute;
-  /* left: 50%; */
-  /* transform: translateX(-50%) translateY(1000%); */
   width: 100%;
   max-width: 205px;
   z-index: 10;
@@ -29,11 +27,11 @@
   margin-top: 335px;
   margin-left: 10px;
   font-size: larger;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   border: 0.5px solid black;
   padding: 5px;
   cursor: pointer;
 }
 .point-search:hover {
-  box-shadow: 3px 3px #888888;
+  box-shadow: var(--box-shadow);
 }

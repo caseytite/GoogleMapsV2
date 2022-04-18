@@ -1,4 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap");
+
+:root {
+  scrollbar-width: none;
+  --std-text: whitesmoke;
+  --header-blue: hsl(198deg 100% 43%);
+  --btn-background: black;
+  --box-shadow: 3px 3px #888888;
+  --input-border: 1px solid black;
+  --border-radius: 5px;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   margin: 0;
   font-family: "Rubik";

@@ -8,13 +8,13 @@
   margin-top: 1em;
 }
 .search input {
-  border: 1px solid black;
+  border: var(--input-border);
   padding: 0.5rem;
   font-size: 1.5rem;
   width: 100%;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
 }
 
 .search input:hover {
-  box-shadow: 3px 3px #888888;
+  box-shadow: var(--box-shadow);
 }
