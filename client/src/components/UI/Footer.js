@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-logo">
-        <h2>Maps!</h2>
+        <h2>Mapps!</h2>
         <AddLocationAltIcon
           sx={{
             color: "hsl(83deg 67% 60%)",

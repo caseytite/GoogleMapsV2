@@ -45,7 +45,7 @@ const Register = (props) => {
             value={email}
             onChange={setEmail}
             type={"email"}
-            placeholder={"Email@maps.com"}
+            placeholder={"Email@mapps.com"}
           />
           <label htmlFor="password">Password</label>
           <Input

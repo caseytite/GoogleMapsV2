@@ -25,7 +25,7 @@ const Header = ({ user }) => {
     <div className="header-container">
       <header className="header">
         <div className="title">
-          <h1 onClick={handleLanding}>Maps!</h1>
+          <h1 onClick={handleLanding}>Mapps!</h1>
           <AddLocationAltIcon
             sx={{
               fontSize: "xxx-large",

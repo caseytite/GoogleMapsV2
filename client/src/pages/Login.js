@@ -42,7 +42,7 @@ const Login = () => {
             type="text"
             onChange={setEmail}
             autoComplete="on"
-            placeholder={"Email@maps.com"}
+            placeholder={"Email@mapps.com"}
           />
           <label htmlFor="password">Password</label>
           <Input
@@ -57,8 +57,12 @@ const Login = () => {
       </div>
       {error && <h3 className="error">{error}</h3>}
       <div className="new-user">
-        <h3>First Time ? Register Now!</h3>
-        <Button onClick={handleRegister} children={"Register"} />
+        <h3>
+          First Time ?{" "}
+          <span className="reg-link" onClick={handleRegister}>
+            Register Now!
+          </span>
+        </h3>
       </div>
     </div>
   );

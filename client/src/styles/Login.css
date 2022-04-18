@@ -1,7 +1,7 @@
 .form-container {
   display: flex;
   justify-content: center;
-  margin-top: 100px;
+  margin-top: 120px;
 }
 .login {
   display: flex;
@@ -11,19 +11,20 @@
 }
 
 .login > input {
-  width: 200px;
+  width: 225px;
   margin-bottom: 1em;
-  height: 25px;
+  height: 30px;
   font-size: larger;
   border-radius: 5px;
   border: 1px solid black;
+  padding: 3px;
 }
 .login > label {
   display: inline-block;
   align-self: flex-start;
   font-size: xx-large;
-  margin-left: -5px;
-  margin-bottom: 3px;
+  margin-left: -15px;
+  margin-bottom: 5px;
   color: whitesmoke;
 }
 .error {
@@ -33,10 +34,18 @@
 .login > button {
   display: inline-block;
   align-self: flex-start;
+  margin-left: -15px;
 }
 .new-user {
   color: whitesmoke;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 1em;
+  margin-left: 10px;
+}
+.reg-link {
+  color: hsl(198deg 100% 43%);
+  margin-left: 5px;
+  cursor: pointer;
 }

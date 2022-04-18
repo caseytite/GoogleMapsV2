@@ -8,7 +8,7 @@ const Landing = () => {
 
       <div className="welcome">
         <h1>
-          Welcome to <u>Maps!</u>
+          Welcome to <u>Mapps!</u>
         </h1>
         <AddLocationAltIcon
           sx={{
