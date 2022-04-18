@@ -1,11 +1,9 @@
 import Button from "./Button";
 import "../styles/Header.css";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import LoggedInUser from "../context/AuthContext";
-import { is } from "date-fns/locale";
 
 const Header = (props) => {
   const navigate = useNavigate();
@@ -20,6 +18,7 @@ const Header = (props) => {
 
   const handleLogout = () => {
     localStorage.clear();
+
     navigate("/");
 
     axios.post("/logout");
@@ -27,9 +26,11 @@ const Header = (props) => {
 
   return (
     <div className="header-container">
-      <h1>Maps!</h1>
-      {isLoggedIn && <Button onClick={handleLogout}>Logout</Button>}
-      {!isLoggedIn && <Button onClick={goToLogin}>Login</Button>}
+      <header className="header">
+        <h1>Maps!</h1>
+        {isLoggedIn && <Button onClick={handleLogout}>Logout</Button>}
+        {!isLoggedIn && <Button onClick={goToLogin}>Login</Button>}
+      </header>
     </div>
   );
 };

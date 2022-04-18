@@ -41,6 +41,7 @@ const Map = React.memo((props) => {
   const [addDescription, setAddDescription] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [pointFilter, setPointFilter] = useState("");
 
   const onMapClick = useCallback((event) => {
     setMarker((prev) => {
@@ -106,25 +107,30 @@ const Map = React.memo((props) => {
       }}
     />
   ));
-  const pointSpots = points.map((point) => (
-    <Marker
-      key={point.time}
-      position={{
-        lat: +point.lat,
-        lng: +point.lng,
-      }}
-      icon={{
-        url: "/hand-point-right-solid.svg",
-        scaledSize: new window.google.maps.Size(20, 20),
-        origin: new window.google.maps.Point(0, 0),
-        anchor: new window.google.maps.Point(22, 5),
-      }}
-      animation={2}
-      onClick={() => {
-        setInfo(point);
-      }}
-    />
-  ));
+  const pointSpots = points
+    .filter((point) => {
+      const regex = new RegExp(pointFilter, "gi");
+      return regex.test(point.title);
+    })
+    .map((point) => (
+      <Marker
+        key={point.time}
+        position={{
+          lat: +point.lat,
+          lng: +point.lng,
+        }}
+        icon={{
+          url: "/hand-point-right-solid.svg",
+          scaledSize: new window.google.maps.Size(20, 20),
+          origin: new window.google.maps.Point(0, 0),
+          anchor: new window.google.maps.Point(22, 5),
+        }}
+        animation={2}
+        onClick={() => {
+          setInfo(point);
+        }}
+      />
+    ));
 
   return (
     <div>
@@ -186,6 +192,12 @@ const Map = React.memo((props) => {
             </div>
           </InfoWindow>
         ) : null}
+        <Input
+          className="point-search"
+          value={pointFilter}
+          onChange={setPointFilter}
+          placeholder={"Search your locations"}
+        />
       </GoogleMap>
     </div>
   );

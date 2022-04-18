@@ -1,4 +1,7 @@
 .header-container {
+  background-color: hsl(198deg 100% 43%);
+}
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;

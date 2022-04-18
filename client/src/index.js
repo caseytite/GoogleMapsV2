@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import Header from "./components/Header";
 import LoggedInUser from "./context/AuthContext";
 import Landing from "./components/Landing";
+import Footer from "./components/Footer";
 
 const rootElement = document.getElementById("root");
 render(
@@ -16,10 +17,11 @@ render(
       <ScrollToTop />
       <Header />
       <Routes>
-        <Route exact path="/" element={<Landing />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/map" element={<App />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="login" element={<Login />} />
+        <Route path="map" element={<App />} />
       </Routes>
+      <Footer />
     </LoggedInUser.Provider>
   </BrowserRouter>,
 

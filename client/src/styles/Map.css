@@ -17,3 +17,17 @@
 .inputs > button:hover {
   cursor: pointer;
 }
+
+.point-search {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) translateY(1300%);
+  width: 100%;
+  max-width: 200px;
+  z-index: 10;
+  height: 25px;
+  margin-top: 1em;
+  font-size: larger;
+  border-radius: 5px;
+  border: 0.5px solid black;
+}
