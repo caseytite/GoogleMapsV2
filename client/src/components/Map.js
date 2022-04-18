@@ -6,9 +6,8 @@ import {
   useLoadScript,
   Marker,
   InfoWindow,
-  Data,
 } from "@react-google-maps/api";
-import { formatRelative, set } from "date-fns";
+// import { formatRelative, set } from "date-fns";
 import mapStyles from "../mapStyles";
 import "@reach/combobox/styles.css";
 import "../styles/Map.css";
@@ -44,21 +43,24 @@ const Map = React.memo((props) => {
   const [tags, setTags] = useState("");
   const [pointFilter, setPointFilter] = useState("");
 
-  const onMapClick = useCallback((event) => {
-    setMarker((prev) => {
-      return [
-        ...prev,
-        {
-          lat: event.latLng.lat(),
-          lng: event.latLng.lng(),
-          time: new Date(),
-          description,
-          title,
-        },
-      ];
-    });
-    setAddDescription(false);
-  }, []);
+  const onMapClick = useCallback(
+    (event) => {
+      setMarker((prev) => {
+        return [
+          ...prev,
+          {
+            lat: event.latLng.lat(),
+            lng: event.latLng.lng(),
+            time: new Date(),
+            description,
+            title,
+          },
+        ];
+      });
+      setAddDescription(false);
+    },
+    [description, title]
+  );
 
   const updateMarker = (title, description, tags, lat, lng) => {
     const currentMarker = markers.find((marker) => marker.time === info.time);
@@ -204,7 +206,7 @@ const Map = React.memo((props) => {
           className="point-search"
           value={pointFilter}
           onChange={setPointFilter}
-          placeholder={"Search Locations - Tags"}
+          placeholder={"Filter Locations - Tags"}
         />
       </GoogleMap>
     </div>
