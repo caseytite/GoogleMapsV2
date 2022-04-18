@@ -1,5 +1,5 @@
 import { render } from "react-dom";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import "./index.css";
 import App from "./App";
@@ -7,6 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 import Login from "./components/Login";
 import Header from "./components/Header";
 import LoggedInUser from "./context/AuthContext";
+import Landing from "./components/Landing";
 
 const rootElement = document.getElementById("root");
 render(
@@ -14,17 +15,11 @@ render(
     <LoggedInUser.Provider value={{ userId: localStorage.getItem("userId") }}>
       <ScrollToTop />
       <Header />
-      <Switch>
-        <Route exact path="/">
-          <h1>Welcome!</h1>
-        </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/map">
-          <App />
-        </Route>
-      </Switch>
+      <Routes>
+        <Route exact path="/" element={<Landing />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/map" element={<App />} />
+      </Routes>
     </LoggedInUser.Provider>
   </BrowserRouter>,
 

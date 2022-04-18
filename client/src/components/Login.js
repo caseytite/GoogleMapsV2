@@ -3,13 +3,13 @@ import axios from "axios";
 import Button from "./Button";
 import Input from "./Input";
 import "../styles/Login.css";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const navigate = useHistory();
+  const navigate = useNavigate();
   const handleLogin = (e) => {
     e.preventDefault();
     if (email && password) {
@@ -19,7 +19,7 @@ const Login = () => {
           localStorage.setItem("userId", res.data.user.id);
         })
         .then(() => {
-          navigate.push("/map");
+          navigate("/map");
         })
         .catch((err) => {
           setError("Incorrect Email or Password");

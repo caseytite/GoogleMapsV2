@@ -3,23 +3,24 @@ import "../styles/Header.css";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import LoggedInUser from "../context/AuthContext";
 import { is } from "date-fns/locale";
 
 const Header = (props) => {
-  const navigate = useHistory();
+  const navigate = useNavigate();
   const context = useContext(LoggedInUser);
   const { userId } = context;
 
   const isLoggedIn = userId ? true : false;
 
   const goToLogin = () => {
-    navigate.push("/login");
+    navigate("/login");
   };
 
   const handleLogout = () => {
     localStorage.clear();
-    navigate.push("/");
+    navigate("/");
 
     axios.post("/logout");
   };
