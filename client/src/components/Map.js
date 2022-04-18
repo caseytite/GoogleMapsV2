@@ -98,7 +98,7 @@ const Map = React.memo((props) => {
         lng: +marker.lng,
       }}
       icon={{
-        url: "/hand-point-right-solid.svg",
+        // url: "/hand-point-right-solid.svg",
         scaledSize: new window.google.maps.Size(20, 20),
         origin: new window.google.maps.Point(0, 0),
         anchor: new window.google.maps.Point(22, 5),
@@ -122,7 +122,7 @@ const Map = React.memo((props) => {
           lng: +point.lng,
         }}
         icon={{
-          url: "/hand-point-right-solid.svg",
+          // url: "/hand-point-right-solid.svg",
           scaledSize: new window.google.maps.Size(20, 20),
           origin: new window.google.maps.Point(0, 0),
           anchor: new window.google.maps.Point(22, 5),
