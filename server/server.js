@@ -29,11 +29,11 @@ app.use(
   })
 );
 
-const locationRoutes = require("./routes/locations");
-app.use("/locations", locationRoutes(db));
-
 const userRoutes = require("./routes/user");
 app.use("/user", userRoutes(db));
+
+const locationRoutes = require("./routes/locations");
+app.use("/locations", locationRoutes(db));
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}!`);

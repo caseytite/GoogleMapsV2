@@ -5,10 +5,12 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     db.query(
       `SELECT * FROM locations
-      join users on users.id = user_id 
       WHERE user_id = $1;`,
       [req.session.id]
-    ).then((data) => res.json(data.rows));
+    ).then((data) => {
+      console.log("pins", data.rows);
+      res.json(data.rows);
+    });
   });
 
   router.post("/", (req, res) => {

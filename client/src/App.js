@@ -9,9 +9,15 @@ const App = () => {
   const [points, setPoints] = useState([]);
   const [user, setUser] = useState([]);
   useEffect(() => {
-    axios.get("/locations").then((res) => {
-      setPoints(res.data);
-      setUser(res.data[0]);
+    const GET_USER = axios.get("/user");
+    const GET_PINS = axios.get("/locations");
+
+    Promise.all([GET_USER, GET_PINS]).then((res) => {
+      const [userInfo, pins] = res;
+      console.log("pins", pins.data);
+      console.log("user", userInfo.data.data[0]);
+      setPoints(pins.data);
+      setUser(userInfo.data.data[0]);
     });
   }, []);
   console.log(user);

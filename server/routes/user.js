@@ -3,6 +3,8 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.post("/login", (req, res) => {
+    console.log("email", req.body.email);
+    console.log("password", req.body.password);
     db.query(
       `SELECT * FROM users
       WHERE email = $1
@@ -19,6 +21,20 @@ module.exports = (db) => {
       })
       .catch((err) => res.json({ error: err.message }));
   });
+  router.get("/", (req, res) => {
+    db.query(
+      `SELECT * FROM users
+      WHERE users.id = $1`,
+      [req.session.id]
+    )
+      .then((data) => {
+        console.log("get user", data.rows);
+        res.json({
+          data: data.rows,
+        });
+      })
+      .catch((err) => res.json({ error: err.message }));
+  });
 
   router.post("/logout", (req, res) => {
     req.session = null;
@@ -26,7 +42,7 @@ module.exports = (db) => {
   });
 
   router.post("/register", (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     db.query(
       `INSERT INTO users (first_name,last_name,email,password)
       VALUES ($1,$2,$3,$4) RETURNING *`,
