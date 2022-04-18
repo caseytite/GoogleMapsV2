@@ -25,5 +25,22 @@ module.exports = (db) => {
     res.redirect("/");
   });
 
+  router.post("/register", (req, res) => {
+    console.log(req.body);
+    db.query(
+      `INSERT INTO users (first_name,last_name,email,password)
+      VALUES ($1,$2,$3,$4) RETURNING *`,
+      [
+        req.body.firstName,
+        req.body.lastName,
+        req.body.email.toLowerCase(),
+        req.body.password,
+      ]
+    ).then((data) => {
+      res.json(data.rows);
+      console.log("data", data.rows);
+    });
+  });
+
   return router;
 };

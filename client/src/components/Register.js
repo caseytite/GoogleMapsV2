@@ -1,16 +1,27 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "./UI/Header";
 import "../styles/Register.css";
 import Input from "../components/UI/Input";
 import Button from "./UI/Button";
+import axios from "axios";
 
 const Register = (props) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const handleRegister = (e) => {};
+  const handleRegister = () => {
+    console.log(firstName, lastName, email, password);
+    axios
+      .post("/user/register", { firstName, lastName, email, password })
+      .then(() => {
+        console.log("success");
+        navigate("/login");
+      });
+  };
   return (
     <div className="bg-img">
       <Header />
@@ -36,7 +47,7 @@ const Register = (props) => {
             value={email}
             onChange={setEmail}
             type={"email"}
-            placeholder={"email@maps.com"}
+            placeholder={"Email@maps.com"}
           />
           <label htmlFor="password">Password</label>
           <Input
