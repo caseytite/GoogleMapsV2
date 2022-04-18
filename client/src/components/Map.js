@@ -70,7 +70,7 @@ const Map = React.memo((props) => {
     // setPoints([...points, currentMarker]);
     // setMarker([...otherMarkers, currentMarker]);
     axios
-      .post("/user", { title, description, tags, lat, lng })
+      .post("/locations", { title, description, tags, lat, lng })
       .then((res) => setPoints([res.data]));
 
     setAddDescription(false);

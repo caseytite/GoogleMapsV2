@@ -9,7 +9,7 @@ const App = () => {
   const [points, setPoints] = useState([]);
   const [user, setUser] = useState([]);
   useEffect(() => {
-    axios.get("/user").then((res) => {
+    axios.get("/locations").then((res) => {
       setPoints(res.data);
       setUser(res.data[0]);
     });

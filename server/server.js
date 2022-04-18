@@ -29,31 +29,8 @@ app.use(
   })
 );
 
-app.get("/user", (req, res) => {
-  db.query(
-    `SELECT * FROM locations
-    join users on users.id = user_id 
-    WHERE user_id = $1;`,
-    [req.session.id]
-  ).then((data) => res.json(data.rows));
-});
-
-app.post("/user", (req, res) => {
-  db.query(
-    `INSERT INTO locations (user_id,time,description,lat,lng,title,tags)
-    VALUES ($1,now(),$2,$3,$4,$5,$6) RETURNING *`,
-    [
-      req.session.id,
-      req.body.description,
-      req.body.lat.toString(),
-      req.body.lng.toString(),
-      req.body.title,
-      req.body.tags,
-    ]
-  ).then((data) => {
-    console.log("data", data.rows);
-  });
-});
+const locationRoutes = require("./routes/locations");
+app.use("/locations", locationRoutes(db));
 
 app.post("/login", (req, res) => {
   db.query(
