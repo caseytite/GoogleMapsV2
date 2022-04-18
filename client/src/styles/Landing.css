@@ -2,6 +2,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 200px;
+  padding-top: 200px;
+  color: whitesmoke;
   font-size: x-large;
+}
+.bg-img {
+  background-image: url("../../public/images/9195170292_bac64c44c8_k.jpeg");
+  /* background: 95%; */
+  top: 0;
+  height: 100vw;
+  /* width: 100%; */
+  /* background-size: cover; */
 }
