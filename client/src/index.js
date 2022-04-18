@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import LoggedInUser from "./context/AuthContext";
 import Landing from "./components/Landing";
 import Footer from "../src/components/UI/Footer";
+import Register from "./components/Register";
 
 const rootElement = document.getElementById("root");
 render(
@@ -17,6 +18,7 @@ render(
         <Route path="/" element={<Landing />} />
         <Route path="login" element={<Login />} />
         <Route path="map" element={<App />} />
+        <Route path="register" element={<Register />} />
       </Routes>
       <Footer />
     </LoggedInUser.Provider>
