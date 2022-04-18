@@ -32,28 +32,8 @@ app.use(
 const locationRoutes = require("./routes/locations");
 app.use("/locations", locationRoutes(db));
 
-app.post("/login", (req, res) => {
-  db.query(
-    `SELECT * FROM users
-    WHERE email = $1
-    AND password = $2`,
-    [req.body.email, req.body.password]
-  )
-    .then((data) => {
-      const user = data.rows;
-      req.session.id = user[0].id;
-      res.json({
-        data: data.rows,
-        user: user[0],
-      });
-    })
-    .catch((err) => res.json({ error: err.message }));
-});
-
-app.post("/logout", (req, res) => {
-  req.session = null;
-  res.redirect("/");
-});
+const userRoutes = require("./routes/user");
+app.use("/user", userRoutes(db));
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}!`);

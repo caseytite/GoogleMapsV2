@@ -14,7 +14,7 @@ const Header = ({ user }) => {
   const handleLogout = () => {
     localStorage.clear();
     navigate("/");
-    axios.post("/logout");
+    axios.post("/user/logout");
   };
 
   const handleLanding = () => {

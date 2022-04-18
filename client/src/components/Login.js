@@ -15,7 +15,7 @@ const Login = () => {
     e.preventDefault();
     if (email && password) {
       axios
-        .post("/login", { email, password })
+        .post("/user/login", { email, password })
         .then((res) => {
           localStorage.setItem("userId", res.data.user.id);
         })
