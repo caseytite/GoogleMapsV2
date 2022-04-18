@@ -29,7 +29,7 @@ const Login = () => {
     }
   };
   return (
-    <>
+    <div className="bg-img">
       <Header />
       <div className="form-container">
         <form className="login" action="" onSubmit={handleLogin}>
@@ -53,7 +53,7 @@ const Login = () => {
         </form>
         {error && <h3 className="error">{error}</h3>}
       </div>
-    </>
+    </div>
   );
 };
 
