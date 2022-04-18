@@ -10,21 +10,18 @@ const Header = (props) => {
   const navigate = useHistory();
   const context = useContext(LoggedInUser);
   const { userId } = context;
-  const [active, setActive] = useState(false);
 
   const isLoggedIn = userId ? true : false;
 
   const goToLogin = () => {
-    setActive(true);
     navigate.push("/login");
   };
 
   const handleLogout = () => {
     localStorage.clear();
-    setActive(false);
-    axios.post("/logout");
-
     navigate.push("/");
+
+    axios.post("/logout");
   };
 
   return (

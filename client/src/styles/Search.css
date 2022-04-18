@@ -1,6 +1,5 @@
 .search {
   position: absolute;
-  /* top: 1rem; */
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
@@ -9,17 +8,13 @@
   margin-top: 1em;
 }
 .search input {
+  border: 1px solid black;
   padding: 0.5rem;
   font-size: 1.5rem;
   width: 100%;
   border-radius: 5px;
-  border: none;
 }
 
-.search input:focus {
-  outline: none;
-}
 .search input:hover {
-  border: 1px solid black;
   box-shadow: 3px 3px #888888;
 }
