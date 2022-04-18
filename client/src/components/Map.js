@@ -8,11 +8,11 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 // import { formatRelative, set } from "date-fns";
-import mapStyles from "../mapStyles";
+import mapStyles from "../mapStyles/mapStyles";
 import "@reach/combobox/styles.css";
 import "../styles/Map.css";
 import axios from "axios";
-import Input from "./Input";
+import Input from "./UI/Input";
 
 const mapContainerStyle = {
   width: "100vw",

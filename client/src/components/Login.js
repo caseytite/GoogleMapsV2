@@ -1,10 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
-import Button from "./Button";
-import Input from "./Input";
+import Button from "./UI/Button";
+import Input from "./UI/Input";
 import "../styles/Login.css";
 import { useNavigate } from "react-router-dom";
-import Header from "./Header";
+import Header from "../components/UI/Header";
 
 const Login = () => {
   const [email, setEmail] = useState("");

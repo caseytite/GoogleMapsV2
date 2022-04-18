@@ -1,4 +1,4 @@
-import "../styles/Footer.css";
+import "../../styles/Footer.css";
 import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
 const Footer = () => {
   return (

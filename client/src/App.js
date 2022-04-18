@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import Map from "./components/Map";
 import axios from "axios";
 import "./App.css";
-import Header from "./components/Header";
+import Header from "../src/components/UI/Header";
+
 const App = () => {
   const [points, setPoints] = useState([]);
   const [user, setUser] = useState([]);
