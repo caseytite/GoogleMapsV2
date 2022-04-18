@@ -14,13 +14,11 @@ const App = () => {
 
     Promise.all([GET_USER, GET_PINS]).then((res) => {
       const [userInfo, pins] = res;
-      console.log("pins", pins.data);
-      console.log("user", userInfo.data.data[0]);
       setPoints(pins.data);
       setUser(userInfo.data.data[0]);
     });
   }, []);
-  console.log(user);
+
   return (
     <>
       <Header user={user} />

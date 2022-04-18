@@ -28,6 +28,9 @@ const Login = () => {
         });
     }
   };
+  const handleRegister = () => {
+    navigate("/register");
+  };
   return (
     <div className="bg-img">
       <Header />
@@ -51,7 +54,11 @@ const Login = () => {
           />
           <Button onClick={(e) => handleLogin(e)}>Sign in</Button>
         </form>
-        {error && <h3 className="error">{error}</h3>}
+      </div>
+      {error && <h3 className="error">{error}</h3>}
+      <div className="new-user">
+        <h3>First Time ? Register Now!</h3>
+        <Button onClick={handleRegister} children={"Register"} />
       </div>
     </div>
   );

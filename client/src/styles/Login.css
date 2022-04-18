@@ -28,8 +28,15 @@
 }
 .error {
   text-align: center;
+  color: whitesmoke;
 }
 .login > button {
   display: inline-block;
   align-self: flex-start;
+}
+.new-user {
+  color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

@@ -14,11 +14,9 @@ const Register = (props) => {
   const navigate = useNavigate();
 
   const handleRegister = () => {
-    console.log(firstName, lastName, email, password);
     axios
       .post("/user/register", { firstName, lastName, email, password })
       .then(() => {
-        console.log("success");
         navigate("/login");
       });
   };
