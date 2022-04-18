@@ -48,7 +48,7 @@ app.post("/user", (req, res) => {
       req.body.lat.toString(),
       req.body.lng.toString(),
       req.body.title,
-      "pizza",
+      req.body.tags,
     ]
   ).then((data) => {
     console.log("data", data.rows);

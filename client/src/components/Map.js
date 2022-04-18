@@ -41,6 +41,7 @@ const Map = React.memo((props) => {
   const [addDescription, setAddDescription] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [tags, setTags] = useState("");
   const [pointFilter, setPointFilter] = useState("");
 
   const onMapClick = useCallback((event) => {
@@ -59,20 +60,21 @@ const Map = React.memo((props) => {
     setAddDescription(false);
   }, []);
 
-  const updateMarker = (title, description, lat, lng) => {
+  const updateMarker = (title, description, tags, lat, lng) => {
     const currentMarker = markers.find((marker) => marker.time === info.time);
-    const otherMarkers = markers.filter((marker) => marker.time !== info.time);
+    // const otherMarkers = markers.filter((marker) => marker.time !== info.time);
     currentMarker.description = description;
     currentMarker.title = title;
     // setPoints([...points, currentMarker]);
     // setMarker([...otherMarkers, currentMarker]);
     axios
-      .post("/user", { title, description, lat, lng })
+      .post("/user", { title, description, tags, lat, lng })
       .then((res) => setPoints([res.data]));
 
     setAddDescription(false);
     setTitle("");
     setDescription("");
+    setTags("");
   };
 
   const mapReference = useRef();
@@ -110,7 +112,7 @@ const Map = React.memo((props) => {
   const pointSpots = points
     .filter((point) => {
       const regex = new RegExp(pointFilter, "gi");
-      return regex.test(point.title);
+      return regex.test(point.title || point.tags);
     })
     .map((point) => (
       <Marker
@@ -180,9 +182,15 @@ const Map = React.memo((props) => {
                     onChange={setDescription}
                     placeholder={"Description"}
                   />
+                  <h3>Add Tags</h3>
+                  <Input
+                    value={tags}
+                    onChange={setTags}
+                    placeholder={"Add Tags"}
+                  />
                   <button
                     onClick={() =>
-                      updateMarker(title, description, info.lat, info.lng)
+                      updateMarker(title, description, tags, info.lat, info.lng)
                     }
                   >
                     Save

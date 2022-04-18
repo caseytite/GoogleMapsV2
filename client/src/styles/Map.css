@@ -1,7 +1,7 @@
 .inputs {
   display: flex;
   flex-direction: column;
-  height: 125px;
+  height: 175px;
   justify-content: space-around;
 }
 
@@ -21,7 +21,7 @@
 .point-search {
   position: absolute;
   left: 50%;
-  transform: translateX(-50%) translateY(1300%);
+  transform: translateX(-50%) translateY(1000%);
   width: 100%;
   max-width: 200px;
   z-index: 10;
@@ -30,4 +30,9 @@
   font-size: larger;
   border-radius: 5px;
   border: 0.5px solid black;
+  padding: 5px;
+  cursor: pointer;
+}
+.point-search:hover {
+  box-shadow: 3px 3px #888888;
 }

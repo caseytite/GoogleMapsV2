@@ -1,6 +1,7 @@
 import Button from "./Button";
 import "../styles/Header.css";
 import axios from "axios";
+import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import LoggedInUser from "../context/AuthContext";
@@ -27,7 +28,15 @@ const Header = (props) => {
   return (
     <div className="header-container">
       <header className="header">
-        <h1>Maps!</h1>
+        <div className="title">
+          <h1>Maps!</h1>
+          <AddLocationAltIcon
+            sx={{
+              fontSize: "xxx-large",
+              color: "hsl(83deg 67% 60%)",
+            }}
+          />
+        </div>
         {isLoggedIn && <Button onClick={handleLogout}>Logout</Button>}
         {!isLoggedIn && <Button onClick={goToLogin}>Login</Button>}
       </header>
