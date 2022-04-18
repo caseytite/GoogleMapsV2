@@ -17,13 +17,13 @@
   font-size: larger;
   border-radius: 5px;
   border: 1px solid black;
-  padding: 3px;
+  padding: 3px 10px;
 }
 .login > label {
   display: inline-block;
   align-self: flex-start;
   font-size: xx-large;
-  margin-left: -15px;
+  margin-left: -25px;
   margin-bottom: 5px;
   color: whitesmoke;
 }
@@ -34,7 +34,7 @@
 .login > button {
   display: inline-block;
   align-self: flex-start;
-  margin-left: -15px;
+  margin-left: -25px;
 }
 .new-user {
   color: whitesmoke;

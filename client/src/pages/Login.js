@@ -24,7 +24,6 @@ const Login = () => {
         })
         .catch((err) => {
           setError("Incorrect Email or Password");
-          // console.log("Login Error:", err.message);
         });
     }
   };

@@ -1,7 +1,7 @@
 .reg-container {
   display: flex;
   justify-content: center;
-  margin-top: 25px;
+  margin-top: 20px;
   color: whitesmoke;
 }
 .reg-form > h1 {
@@ -16,24 +16,25 @@
 }
 
 .reg-form > input {
-  width: 200px;
+  width: 225px;
   margin-bottom: 1em;
-  height: 25px;
+  height: 30px;
   font-size: larger;
   border-radius: 5px;
   border: 1px solid black;
-  padding: 3px;
+  padding: 3px 10px;
 }
 .reg-form > label {
   display: inline-block;
   align-self: flex-start;
   font-size: xx-large;
-  margin-left: -5px;
-  margin-bottom: 3px;
+  margin-left: -25px;
+  margin-bottom: 5px;
   /* color: whitesmoke; */
 }
 .reg-form > button {
   display: inline-block;
   align-self: flex-start;
+  margin-left: -25px;
   /* color: whitesmoke; */
 }
