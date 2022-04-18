@@ -8,7 +8,7 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 // import { formatRelative, set } from "date-fns";
-import mapStyles from "../mapStyles/mapStyles";
+import { styles } from "../mapStyles/mapStyles";
 import "@reach/combobox/styles.css";
 import "../styles/Map.css";
 import axios from "axios";
@@ -23,7 +23,7 @@ const defaultLocation = {
   lng: -123.365646,
 };
 const options = {
-  styles: mapStyles,
+  styles,
   disableDefaultUI: true,
   zoomControl: true,
 };
