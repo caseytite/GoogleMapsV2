@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useRef } from "react";
-import Search from "./Search";
-import LocateUser from "./LocateUser";
+import Search from "../components/Search";
+import LocateUser from "../components/LocateUser";
 import {
   GoogleMap,
   useLoadScript,
@@ -12,7 +12,7 @@ import { styles } from "../mapStyles/mapStyles";
 import "@reach/combobox/styles.css";
 import "../styles/Map.css";
 import axios from "axios";
-import Input from "./UI/Input";
+import Input from "../components/UI/Input";
 
 const mapContainerStyle = {
   width: "100vw",

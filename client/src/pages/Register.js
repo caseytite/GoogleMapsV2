@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "./UI/Header";
+import Header from "../components/UI/Header";
 import "../styles/Register.css";
 import Input from "../components/UI/Input";
-import Button from "./UI/Button";
+import Button from "../components/UI/Button";
 import axios from "axios";
 
 const Register = (props) => {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
-import Button from "./UI/Button";
-import Input from "./UI/Input";
+import Button from "../components/UI/Button";
+import Input from "../components/UI/Input";
 import "../styles/Login.css";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/UI/Header";

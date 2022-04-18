@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import Map from "./components/Map";
+import Map from "./pages/Map";
 import axios from "axios";
 import "./App.css";
 import Header from "../src/components/UI/Header";

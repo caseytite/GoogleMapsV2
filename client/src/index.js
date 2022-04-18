@@ -3,11 +3,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./utils/ScrollToTop";
 import "./index.css";
 import App from "./App";
-import Login from "./components/Login";
+import Login from "./pages/Login";
 import LoggedInUser from "./context/AuthContext";
-import Landing from "./components/Landing";
+import Landing from "./pages/Landing";
 import Footer from "../src/components/UI/Footer";
-import Register from "./components/Register";
+import Register from "./pages/Register";
 
 const rootElement = document.getElementById("root");
 render(
