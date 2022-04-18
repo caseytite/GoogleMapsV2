@@ -1,5 +1,11 @@
+import Header from "./Header";
 const Landing = () => {
-  return <h1>Welcome!</h1>;
+  return (
+    <>
+      <Header />
+      <h1>Welcome!</h1>
+    </>
+  );
 };
 
 export default Landing;

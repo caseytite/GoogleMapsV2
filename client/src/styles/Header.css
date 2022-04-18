@@ -1,5 +1,6 @@
 .header-container {
   background-color: hsl(198deg 100% 43%);
+  border-bottom: 2px solid rgb(201, 195, 195);
 }
 .header {
   display: flex;

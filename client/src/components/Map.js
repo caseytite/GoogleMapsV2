@@ -97,12 +97,12 @@ const Map = React.memo((props) => {
         lat: +marker.lat,
         lng: +marker.lng,
       }}
-      icon={{
-        // url: "/hand-point-right-solid.svg",
-        scaledSize: new window.google.maps.Size(20, 20),
-        origin: new window.google.maps.Point(0, 0),
-        anchor: new window.google.maps.Point(22, 5),
-      }}
+      // icon={{
+      //   url: "/hand-point-right-solid.svg",
+      //   scaledSize: new window.google.maps.Size(20, 20),
+      //   origin: new window.google.maps.Point(0, 0),
+      //   anchor: new window.google.maps.Point(22, 5),
+      // }}
       animation={2}
       onClick={() => {
         setInfo(marker);
@@ -121,12 +121,12 @@ const Map = React.memo((props) => {
           lat: +point.lat,
           lng: +point.lng,
         }}
-        icon={{
-          // url: "/hand-point-right-solid.svg",
-          scaledSize: new window.google.maps.Size(20, 20),
-          origin: new window.google.maps.Point(0, 0),
-          anchor: new window.google.maps.Point(22, 5),
-        }}
+        // icon={{
+        //   url: "/hand-point-right-solid.svg",
+        //   scaledSize: new window.google.maps.Size(20, 20),
+        //   origin: new window.google.maps.Point(0, 0),
+        //   anchor: new window.google.maps.Point(22, 5),
+        // }}
         animation={2}
         onClick={() => {
           setInfo(point);
@@ -135,7 +135,7 @@ const Map = React.memo((props) => {
     ));
 
   return (
-    <div>
+    <div className="map-container">
       <Search moveTo={moveTo} />
       <LocateUser moveTo={moveTo} />
 
@@ -204,7 +204,7 @@ const Map = React.memo((props) => {
           className="point-search"
           value={pointFilter}
           onChange={setPointFilter}
-          placeholder={"Search your locations"}
+          placeholder={"Search Locations - Tags"}
         />
       </GoogleMap>
     </div>

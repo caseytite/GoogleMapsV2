@@ -2,18 +2,10 @@ import Button from "./Button";
 import "../styles/Header.css";
 import axios from "axios";
 import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
-import { useContext, useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LoggedInUser from "../context/AuthContext";
 
-const Header = (props) => {
+const Header = ({ user }) => {
   const navigate = useNavigate();
-  const context = useContext(LoggedInUser);
-  const { userId } = context;
-  const [, updateState] = useState();
-  const forceUpdate = useCallback(() => updateState({}), []);
-
-  const isLoggedIn = userId ? true : false;
 
   const goToLogin = () => {
     navigate("/login");
@@ -21,10 +13,7 @@ const Header = (props) => {
 
   const handleLogout = () => {
     localStorage.clear();
-    forceUpdate();
-
     navigate("/");
-
     axios.post("/logout");
   };
 
@@ -40,8 +29,8 @@ const Header = (props) => {
             }}
           />
         </div>
-        {isLoggedIn && <Button onClick={handleLogout}>Logout</Button>}
-        {!isLoggedIn && <Button onClick={goToLogin}>Login</Button>}
+        {user && <Button onClick={handleLogout}>Logout</Button>}
+        {!user && <Button onClick={goToLogin}>Login</Button>}
       </header>
     </div>
   );

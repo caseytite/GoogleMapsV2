@@ -15,7 +15,6 @@ render(
   <BrowserRouter>
     <LoggedInUser.Provider value={{ userId: localStorage.getItem("userId") }}>
       <ScrollToTop />
-      <Header />
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="login" element={<Login />} />

@@ -4,6 +4,7 @@ import Button from "./Button";
 import Input from "./Input";
 import "../styles/Login.css";
 import { useNavigate } from "react-router-dom";
+import Header from "./Header";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -28,28 +29,31 @@ const Login = () => {
     }
   };
   return (
-    <div className="form-container">
-      <form className="login" action="" onSubmit={handleLogin}>
-        <label htmlFor="email">Email</label>
-        <Input
-          value={email}
-          type="text"
-          onChange={setEmail}
-          autoComplete="on"
-          placeholder={"Email@maps.com"}
-        />
-        <label htmlFor="password">Password</label>
-        <Input
-          value={password}
-          onChange={setPassword}
-          type="password"
-          autoComplete="on"
-          placeholder={"Password"}
-        />
-        <Button onClick={(e) => handleLogin(e)}>Sign in</Button>
-      </form>
-      {error && <h3 className="error">{error}</h3>}
-    </div>
+    <>
+      <Header />
+      <div className="form-container">
+        <form className="login" action="" onSubmit={handleLogin}>
+          <label htmlFor="email">Email</label>
+          <Input
+            value={email}
+            type="text"
+            onChange={setEmail}
+            autoComplete="on"
+            placeholder={"Email@maps.com"}
+          />
+          <label htmlFor="password">Password</label>
+          <Input
+            value={password}
+            onChange={setPassword}
+            type="password"
+            autoComplete="on"
+            placeholder={"Password"}
+          />
+          <Button onClick={(e) => handleLogin(e)}>Sign in</Button>
+        </form>
+        {error && <h3 className="error">{error}</h3>}
+      </div>
+    </>
   );
 };
 
