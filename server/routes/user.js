@@ -24,33 +24,48 @@ module.exports = (db) => {
 
   router.post("/login", (req, res) => {
     const { email, password } = req.body;
-    db.query(
-      `SELECT * FROM users
+    if (email === "casey@email.com" || email === "owen@email.com") {
+      db.query(
+        `SELECT * FROM users
+            WHERE email = $1 AND password = $2`,
+        [email.toLowerCase(), password]
+      ).then((data) => {
+        const user = data.rows;
+        req.session.id = user[0].id;
+        res.json({
+          data: data.rows,
+          user: user[0],
+        });
+      });
+    } else {
+      db.query(
+        `SELECT * FROM users
         WHERE email = $1 `,
-      [email.toLowerCase()]
-    )
-      .then((data) => {
-        console.log("db password", data.rows[0].password);
-        if (data) {
-          const validPassword = bcrypt.compareSync(
-            password,
-            data.rows[0].password
-          );
-          if (validPassword) {
-            const validUser = data.rows;
-            req.session.id = validUser[0].id;
-            res.json({
-              data: data.rows,
-              user: validUser[0],
-            });
-          } else {
-            res.json({
-              error: "incorrect password",
-            });
+        [email.toLowerCase()]
+      )
+        .then((data) => {
+          console.log("db password", data.rows[0].password);
+          if (data) {
+            const validPassword = bcrypt.compareSync(
+              password,
+              data.rows[0].password
+            );
+            if (validPassword) {
+              const validUser = data.rows;
+              req.session.id = validUser[0].id;
+              res.json({
+                data: data.rows,
+                user: validUser[0],
+              });
+            } else {
+              res.json({
+                error: "incorrect password",
+              });
+            }
           }
-        }
-      })
-      .catch((e) => console.log("e", e.message));
+        })
+        .catch((e) => console.log("e", e.message));
+    }
   });
 
   router.get("/", (req, res) => {
