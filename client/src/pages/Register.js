@@ -11,14 +11,17 @@ const Register = (props) => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const navigate = useNavigate();
 
   const handleRegister = () => {
-    axios
-      .post("/user/register", { firstName, lastName, email, password })
-      .then(() => {
-        navigate("/login");
-      });
+    if (firstName && lastName && email && password) {
+      axios
+        .post("/user/register", { firstName, lastName, email, password })
+        .then(() => {
+          navigate("/login");
+        });
+    }
   };
   return (
     <div className="bg-img">
@@ -32,6 +35,7 @@ const Register = (props) => {
             onChange={setFirstName}
             type={"text"}
             placeholder={"First Name"}
+            required={true}
           />
           <label htmlFor="lastName">Last Name</label>
           <Input
@@ -39,6 +43,7 @@ const Register = (props) => {
             onChange={setLastName}
             type={"text"}
             placeholder="Last Name"
+            required={true}
           />
           <label htmlFor="email">Email</label>
           <Input
@@ -46,6 +51,7 @@ const Register = (props) => {
             onChange={setEmail}
             type={"email"}
             placeholder={"Email@mapps.com"}
+            required={true}
           />
           <label htmlFor="password">Password</label>
           <Input
@@ -53,6 +59,7 @@ const Register = (props) => {
             onChange={setPassword}
             type={"password"}
             placeholder={"Password"}
+            required={true}
           />
           <Button onClick={handleRegister} children={"Register!"} />
         </form>

@@ -12,7 +12,6 @@ const Login = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const handleLogin = (e) => {
-    e.preventDefault();
     if (email && password) {
       axios
         .post("/user/login", { email, password })
@@ -34,14 +33,15 @@ const Login = () => {
     <div className="bg-img">
       <Header />
       <div className="form-container">
-        <form className="login" action="" onSubmit={handleLogin}>
+        <form className="login" action="" onSubmit={(e) => e.preventDefault()}>
           <label htmlFor="email">Email</label>
           <Input
             value={email}
-            type="text"
+            type="email"
             onChange={setEmail}
             autoComplete="on"
             placeholder={"Email@mapps.com"}
+            required={true}
           />
           <label htmlFor="password">Password</label>
           <Input
@@ -50,8 +50,9 @@ const Login = () => {
             type="password"
             autoComplete="on"
             placeholder={"Password"}
+            required={true}
           />
-          <Button onClick={(e) => handleLogin(e)}>Sign in</Button>
+          <Button onClick={handleLogin}>Sign in</Button>
         </form>
       </div>
       {error && <h3 className="error">{error}</h3>}

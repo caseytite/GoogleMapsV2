@@ -6,6 +6,7 @@ const Input = (props) => {
       value={props.value}
       onChange={(e) => props.onChange(e.target.value)}
       type={props.type}
+      required={props.required ? true : false}
     ></input>
   );
 };
