@@ -79,6 +79,29 @@ const Map = React.memo((props) => {
     setTags("");
   };
 
+  const editMarker = (title, description, id, tags) => {
+    axios
+      .put(`/locations/${id}`, { title, description, tags })
+      .then((res) => {
+        setAddDescription(false);
+        setTitle("");
+        setDescription("");
+        setTags("");
+
+        return res;
+      })
+      .then((res) => {
+        const otherMarkers = points.filter(
+          (marker) => marker.time !== info.time
+        );
+        setInfo(null);
+        setPoints([...otherMarkers, ...res.data]);
+        setInfo(...res.data);
+      });
+  };
+
+  const deleteMarker = () => {};
+
   const mapReference = useRef();
   const onMapLoad = useCallback((map) => {
     mapReference.current = map;
@@ -118,7 +141,7 @@ const Map = React.memo((props) => {
     })
     .map((point) => (
       <Marker
-        key={point.time}
+        key={point.id}
         position={{
           lat: +point.lat,
           lng: +point.lng,
@@ -145,7 +168,7 @@ const Map = React.memo((props) => {
         mapContainerStyle={mapContainerStyle}
         zoom={12}
         center={defaultLocation}
-        onClick={onMapClick}
+        onClick={info ? null : onMapClick}
         onLoad={onMapLoad}
         options={options}
       >
@@ -166,7 +189,7 @@ const Map = React.memo((props) => {
                   <p>Created {new Date(info.time).toDateString()}</p>
                   {info.description && <p>{info.description}</p>}
                   <button onClick={() => setAddDescription(true)}>
-                    Add Details
+                    Edit Details
                   </button>
                 </div>
               )}
@@ -196,6 +219,13 @@ const Map = React.memo((props) => {
                     }
                   >
                     Save
+                  </button>
+                  <button
+                    onClick={() =>
+                      editMarker(title, description, info.id, tags)
+                    }
+                  >
+                    Edit Marker
                   </button>
                 </div>
               )}

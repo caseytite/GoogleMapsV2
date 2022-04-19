@@ -8,7 +8,6 @@ module.exports = (db) => {
       WHERE user_id = $1;`,
       [req.session.id]
     ).then((data) => {
-      console.log("pins", data.rows);
       res.json(data.rows);
     });
   });
@@ -27,6 +26,18 @@ module.exports = (db) => {
       ]
     ).then((data) => {
       console.log("data", data.rows);
+    });
+  });
+
+  router.put("/:id", (req, res) => {
+    db.query(
+      `UPDATE locations
+        SET(title,description,tags) = ($1,$2,$3)
+        WHERE id = $4 RETURNING *;
+        `,
+      [req.body.title, req.body.description, req.body.tags, req.params.id]
+    ).then((data) => {
+      res.json(data.rows);
     });
   });
 
