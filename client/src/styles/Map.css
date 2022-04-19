@@ -24,8 +24,8 @@
   max-width: 205px;
   z-index: 10;
   height: 25px;
-  margin-top: 335px;
-  margin-left: 10px;
+  bottom: 0;
+  margin: 3px 10px;
   font-size: larger;
   border-radius: var(--border-radius);
   border: 0.5px solid black;

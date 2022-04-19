@@ -7,7 +7,6 @@ import {
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
-// import { formatRelative, set } from "date-fns";
 import { styles } from "../mapStyles/mapStyles";
 import "@reach/combobox/styles.css";
 import "../styles/Map.css";
@@ -66,14 +65,11 @@ const Map = React.memo((props) => {
 
   const updateMarker = (title, description, tags, lat, lng) => {
     const currentMarker = markers.find((marker) => marker.time === info.time);
-    // const otherMarkers = markers.filter((marker) => marker.time !== info.time);
     currentMarker.description = description;
     currentMarker.title = title;
-    // setPoints([...points, currentMarker]);
-    // setMarker([...otherMarkers, currentMarker]);
     axios
       .post("/locations", { title, description, tags, lat, lng })
-      .then((res) => setPoints([res.data]));
+      .then((res) => setPoints([...res.data]));
 
     setAddDescription(false);
     setTitle("");
@@ -106,7 +102,6 @@ const Map = React.memo((props) => {
     axios.delete(`/locations/${id}`).then((res) => {
       setAddDescription(false);
       setInfo(null);
-      console.log("res", res.data);
       setPoints([...res.data]);
     });
   };
