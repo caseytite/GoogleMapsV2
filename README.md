@@ -1,9 +1,9 @@
 # Mapps!
 
-A google maps project extending off my other Maps project.
-Built with React, You can create an account, save pins, search your pins and the globe! If you get lost, find yourself!
-
-Working on adding public pins, ability to edit or delete current pins.
+A Google maps project extending off my other Maps project.
+Built with A PostgreSQL, Express, React.js, Node.js stack.
+You can create an account, save, update, delete and search your pins.
+Use Mapps! to search the globe and if you get lost, find yourself!
 
 ### Adding and Editing pins
 
