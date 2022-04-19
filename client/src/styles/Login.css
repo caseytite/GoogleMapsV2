@@ -42,8 +42,8 @@
   flex-direction: column;
   align-items: center;
   margin-top: 1em;
-  margin-left: 10px;
 }
+
 .reg-link {
   color: var(--header-blue);
   margin-left: 5px;
