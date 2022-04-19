@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   cookieSession({
     name: "session",
-    keys: ["chicken", "horse", "cat"],
+    keys: ["sic mundus creatus est", " and thus the world was created"],
   })
 );
 
