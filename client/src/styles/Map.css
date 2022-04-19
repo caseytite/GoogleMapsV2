@@ -35,3 +35,7 @@
 .point-search:hover {
   box-shadow: var(--box-shadow);
 }
+.edit-delete {
+  display: flex;
+  justify-content: space-between;
+}

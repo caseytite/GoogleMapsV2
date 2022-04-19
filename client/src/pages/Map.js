@@ -18,10 +18,12 @@ const mapContainerStyle = {
   width: "100vw",
   height: "50vh",
 };
+
 const defaultLocation = {
   lat: 48.428421,
   lng: -123.365646,
 };
+
 const options = {
   styles,
   disableDefaultUI: true,
@@ -100,7 +102,14 @@ const Map = React.memo((props) => {
       });
   };
 
-  const deleteMarker = () => {};
+  const deleteMarker = (id) => {
+    axios.delete(`/locations/${id}`).then((res) => {
+      setAddDescription(false);
+      setInfo(null);
+      console.log("res", res.data);
+      setPoints([...res.data]);
+    });
+  };
 
   const mapReference = useRef();
   const onMapLoad = useCallback((map) => {
@@ -122,12 +131,6 @@ const Map = React.memo((props) => {
         lat: +marker.lat,
         lng: +marker.lng,
       }}
-      // icon={{
-      //   url: "/hand-point-right-solid.svg",
-      //   scaledSize: new window.google.maps.Size(20, 20),
-      //   origin: new window.google.maps.Point(0, 0),
-      //   anchor: new window.google.maps.Point(22, 5),
-      // }}
       animation={2}
       onClick={() => {
         setInfo(marker);
@@ -146,12 +149,6 @@ const Map = React.memo((props) => {
           lat: +point.lat,
           lng: +point.lng,
         }}
-        // icon={{
-        //   url: "/hand-point-right-solid.svg",
-        //   scaledSize: new window.google.maps.Size(20, 20),
-        //   origin: new window.google.maps.Point(0, 0),
-        //   anchor: new window.google.maps.Point(22, 5),
-        // }}
         animation={2}
         onClick={() => {
           setInfo(point);
@@ -213,20 +210,35 @@ const Map = React.memo((props) => {
                     onChange={setTags}
                     placeholder={"Add Tags"}
                   />
-                  <button
-                    onClick={() =>
-                      updateMarker(title, description, tags, info.lat, info.lng)
-                    }
-                  >
-                    Save
-                  </button>
-                  <button
-                    onClick={() =>
-                      editMarker(title, description, info.id, tags)
-                    }
-                  >
-                    Edit Marker
-                  </button>
+                  {!info.description && (
+                    <button
+                      onClick={() =>
+                        updateMarker(
+                          title,
+                          description,
+                          tags,
+                          info.lat,
+                          info.lng
+                        )
+                      }
+                    >
+                      Save
+                    </button>
+                  )}
+                  {info.description && (
+                    <div className="edit-delete">
+                      <button
+                        onClick={() =>
+                          editMarker(title, description, info.id, tags)
+                        }
+                      >
+                        Edit Marker
+                      </button>
+                      <button onClick={() => deleteMarker(info.id)}>
+                        Delete
+                      </button>
+                    </div>
+                  )}
                 </div>
               )}
             </div>

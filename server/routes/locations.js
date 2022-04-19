@@ -41,5 +41,23 @@ module.exports = (db) => {
     });
   });
 
+  router.delete("/:id", (req, res) => {
+    db.query(
+      `
+      DELETE FROM locations
+      WHERE id = $1
+      `,
+      [req.params.id]
+    ).then(() => {
+      db.query(
+        `SELECT * FROM locations
+        WHERE user_id = $1;`,
+        [req.session.id]
+      ).then((data) => {
+        res.json(data.rows);
+      });
+    });
+  });
+
   return router;
 };
