@@ -16,6 +16,9 @@ const Login = () => {
       axios
         .post("/user/login", { email, password })
         .then((res) => {
+          if (res.error) {
+            return;
+          }
           localStorage.setItem("userId", res.data.user.id);
         })
         .then(() => {
