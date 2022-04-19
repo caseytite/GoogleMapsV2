@@ -1,4 +1,4 @@
-# Google maps!
+# Mapps!
 
 A google maps project extending off my other Maps project.
 Built with React, You can create an account, save pins, search your pins and the globe! If you get lost, find yourself!
