@@ -5,8 +5,6 @@ Built with React, You can create an account, save pins, search your pins and the
 
 Working on adding public pins, ability to edit or delete current pins.
 
-###### This project was done with the help of [this video](https://www.youtube.com/watch?v=WZcxJGmLbSo)
-
 ### Adding and Editing pins
 
 ![''](https://media3.giphy.com/media/0CM8KneHGmKrL6kVFv/giphy.gif?cid=790b761146f684f7e4984d0f0d746dcb2dfccc854543d5d0&rid=giphy.gif&ct=g)
@@ -34,3 +32,5 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
+
+###### Learing how to use the Google API's was done with the help of [this video](https://www.youtube.com/watch?v=WZcxJGmLbSo)
