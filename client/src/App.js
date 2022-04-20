@@ -18,7 +18,6 @@ const App = () => {
       setUser(userInfo.data.data[0]);
     });
   }, []);
-  console.log("points in app", points);
 
   return (
     <>
