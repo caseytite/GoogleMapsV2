@@ -28,8 +28,14 @@
   color: var(--std-text);
 }
 .error {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1em;
   color: var(--std-text);
+}
+.error > h3 {
+  margin-left: 10px;
 }
 .login > button {
   display: inline-block;

@@ -11,21 +11,22 @@ const Header = ({ user }) => {
     navigate("/login");
   };
 
+  const handleLanding = () => {
+    navigate("/");
+  };
+
   const handleLogout = () => {
     localStorage.clear();
     navigate("/");
     axios.post("/user/logout");
   };
 
-  const handleLanding = () => {
-    navigate("/");
-  };
-
   return (
     <div className="header-container">
       <header className="header">
         <div className="title">
-          <h1 onClick={handleLanding}>Mapps!</h1>
+          {user && <h1>Mapps!</h1>}
+          {!user && <h1 onClick={handleLanding}>Mapps!</h1>}
           <AddLocationAltIcon
             sx={{
               fontSize: "xxx-large",

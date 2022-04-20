@@ -5,6 +5,7 @@ import Input from "../components/UI/Input";
 import "../styles/Login.css";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/UI/Header";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -58,7 +59,15 @@ const Login = () => {
           <Button onClick={handleLogin}>Sign in</Button>
         </form>
       </div>
-      {error && <h3 className="error">{error}</h3>}
+      {error && (
+        <span className="error">
+          <>
+            <ErrorOutlineIcon sx={{ color: "red", fontSize: "xx-large" }} />{" "}
+            <h3>{error}</h3>
+          </>
+        </span>
+      )}
+
       <div className="new-user">
         <h3>
           First Time ?{" "}

@@ -29,14 +29,20 @@ module.exports = (db) => {
         `SELECT * FROM users
             WHERE email = $1 AND password = $2`,
         [email.toLowerCase(), password]
-      ).then((data) => {
-        const user = data.rows;
-        req.session.id = user[0].id;
-        res.json({
-          data: data.rows,
-          user: user[0],
-        });
-      });
+      )
+        .then((data) => {
+          const user = data.rows;
+          req.session.id = user[0].id;
+          res.json({
+            data: data.rows,
+            user: user[0],
+          });
+        })
+        .catch((e) =>
+          res.json({
+            error: "incorrect password",
+          })
+        );
     } else {
       db.query(
         `SELECT * FROM users
@@ -64,7 +70,11 @@ module.exports = (db) => {
             }
           }
         })
-        .catch((e) => console.log("e", e.message));
+        .catch((e) =>
+          res.json({
+            error: "incorrect password",
+          })
+        );
     }
   });
 
