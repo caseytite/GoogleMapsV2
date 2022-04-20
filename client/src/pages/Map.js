@@ -177,7 +177,7 @@ const Map = React.memo((props) => {
                     onChange={setTags}
                     placeholder={"Add Tags"}
                   />
-                  {!info.description && (
+                  <div className="edit-delete">
                     <button
                       onClick={() =>
                         editMarker(title, description, info.id, tags)
@@ -185,21 +185,10 @@ const Map = React.memo((props) => {
                     >
                       Save
                     </button>
-                  )}
-                  {info.description && (
-                    <div className="edit-delete">
-                      <button
-                        onClick={() =>
-                          editMarker(title, description, info.id, tags)
-                        }
-                      >
-                        Edit Marker
-                      </button>
-                      <button onClick={() => deleteMarker(info.id)}>
-                        Delete
-                      </button>
-                    </div>
-                  )}
+                    <button onClick={() => deleteMarker(info.id)}>
+                      Delete
+                    </button>
+                  </div>
                 </div>
               )}
             </div>

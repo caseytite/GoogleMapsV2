@@ -37,5 +37,10 @@
 }
 .edit-delete {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
+}
+.edit-delete > button {
+  margin-top: 5px;
+  margin-left: 10px;
+  height: 20px;
 }
