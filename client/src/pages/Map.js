@@ -39,10 +39,13 @@ const Map = React.memo((props) => {
 
   const [info, setInfo] = useState(null);
   const [addDescription, setAddDescription] = useState(false);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [tags, setTags] = useState("");
   const [pointFilter, setPointFilter] = useState("");
+
+  const [state, setState] = useState({
+    title: "",
+    description: "",
+    tags: "",
+  });
 
   const onMapClick = useCallback((event) => {
     const lat = event.latLng.lat();
@@ -58,9 +61,11 @@ const Map = React.memo((props) => {
       .then((res) => setPoints((prev) => [...prev, ...res.data]));
 
     setAddDescription(false);
-    setTitle("");
-    setDescription("");
-    setTags("");
+    setState((prev) => ({
+      title: "",
+      description: "",
+      tags: "",
+    }));
   };
 
   const editMarker = (title, description, id, tags) => {
@@ -68,9 +73,11 @@ const Map = React.memo((props) => {
       .put(`/locations/${id}`, { title, description, tags })
       .then((res) => {
         setAddDescription(false);
-        setTitle("");
-        setDescription("");
-        setTags("");
+        setState((prev) => ({
+          title: "",
+          description: "",
+          tags: "",
+        }));
 
         return res;
       })
@@ -161,26 +168,46 @@ const Map = React.memo((props) => {
                 <div className="inputs">
                   <h3>Add Title</h3>
                   <Input
-                    value={title}
-                    onChange={setTitle}
+                    value={state.title}
+                    onChange={(e) => {
+                      setState((prev) => ({
+                        ...prev,
+                        title: e,
+                      }));
+                    }}
                     placeholder={"Title"}
                   />
                   <h3>Add Description</h3>
                   <Input
-                    value={description}
-                    onChange={setDescription}
+                    value={state.description}
+                    onChange={(e) =>
+                      setState((prev) => ({
+                        ...prev,
+                        description: e,
+                      }))
+                    }
                     placeholder={"Description"}
                   />
                   <h3>Add Tags</h3>
                   <Input
-                    value={tags}
-                    onChange={setTags}
+                    value={state.tags}
+                    onChange={(e) =>
+                      setState((prev) => ({
+                        ...prev,
+                        tags: e,
+                      }))
+                    }
                     placeholder={"Add Tags"}
                   />
                   <div className="edit-delete">
                     <button
                       onClick={() =>
-                        editMarker(title, description, info.id, tags)
+                        editMarker(
+                          state.title,
+                          state.description,
+                          info.id,
+                          state.tags
+                        )
                       }
                     >
                       Save
