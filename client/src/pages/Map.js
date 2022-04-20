@@ -36,6 +36,7 @@ const Map = React.memo((props) => {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
   });
+  console.log("points", points);
   const [markers, setMarker] = useState(points);
   const [info, setInfo] = useState(null);
   const [addDescription, setAddDescription] = useState(false);
@@ -46,30 +47,46 @@ const Map = React.memo((props) => {
 
   const onMapClick = useCallback(
     (event) => {
-      setMarker((prev) => {
-        return [
-          ...prev,
-          {
-            lat: event.latLng.lat(),
-            lng: event.latLng.lng(),
-            time: new Date(),
-            description,
-            title,
-          },
-        ];
-      });
+      // setMarker((prev) => {
+      //   return [
+      //     ...prev,
+      //     {
+      //       lat: event.latLng.lat(),
+      //       lng: event.latLng.lng(),
+      //       time: new Date(),
+      //       description,
+      //       title,
+      //     },
+      //   ];
+      // });
+      // setPoints((prev) => {
+      //   return [
+      //     ...prev,
+      //     {
+      //       lat: event.latLng.lat(),
+      //       lng: event.latLng.lng(),
+      //       time: new Date(),
+      //     },
+      //   ];
+      // });
+      const lat = event.latLng.lat();
+      const lng = event.latLng.lng();
+      console.log(lat, lng);
+      updateMarker(lat, lng);
       setAddDescription(false);
     },
     [description, title]
   );
 
-  const updateMarker = (title, description, tags, lat, lng) => {
-    const currentMarker = markers.find((marker) => marker.time === info.time);
-    currentMarker.description = description;
-    currentMarker.title = title;
+  const updateMarker = (lat, lng) => {
+    console.log(lat, lng);
+    // const currentMarker = points.find((marker) => marker.time === info.time);
+    // console.log("current", currentMarker);
+    // currentMarker["description"] = description;
+    // currentMarker["title"] = title;
     axios
-      .post("/locations", { title, description, tags, lat, lng })
-      .then((res) => setPoints([...res.data]));
+      .post("/locations", { lat, lng })
+      .then((res) => setPoints((prev) => [...prev, ...res.data]));
 
     setAddDescription(false);
     setTitle("");
@@ -119,19 +136,19 @@ const Map = React.memo((props) => {
   if (loadError) return "Error on map load";
   if (!isLoaded) return "Loading maps";
 
-  const marks = markers.map((marker) => (
-    <Marker
-      key={marker.time}
-      position={{
-        lat: +marker.lat,
-        lng: +marker.lng,
-      }}
-      animation={2}
-      onClick={() => {
-        setInfo(marker);
-      }}
-    />
-  ));
+  // const marks = markers.map((marker) => (
+  //   <Marker
+  //     key={marker.time}
+  //     position={{
+  //       lat: +marker.lat,
+  //       lng: +marker.lng,
+  //     }}
+  //     animation={2}
+  //     onClick={() => {
+  //       setInfo(marker);
+  //     }}
+  //   />
+  // ));
   const pointSpots = points
     .filter((point) => {
       const regex = new RegExp(pointFilter, "gi");
@@ -139,7 +156,7 @@ const Map = React.memo((props) => {
     })
     .map((point) => (
       <Marker
-        key={point.id}
+        key={point.time}
         position={{
           lat: +point.lat,
           lng: +point.lng,
@@ -164,7 +181,7 @@ const Map = React.memo((props) => {
         onLoad={onMapLoad}
         options={options}
       >
-        {marks}
+        {/* {marks} */}
         {pointSpots}
         {info ? (
           <InfoWindow

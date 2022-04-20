@@ -16,6 +16,6 @@ CREATE TABLE locations (
   description VARCHAR(255),
   lat VARCHAR(255) NOT NULL,
   lng VARCHAR(255) NOT NULL,
-  title VARCHAR(255) NOT NULL,
+  title VARCHAR(255) NOT NULL DEFAULT 'New Pin',
   tags VARCHAR(255) 
 );
