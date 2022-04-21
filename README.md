@@ -3,6 +3,7 @@
 A Google maps project extending off my other Maps project.
 Built with A PostgreSQL, Express, React.js, Node.js stack.
 You can create an account, save, update, delete and search your pins.
+You can also set your pins to public to share with others!
 Use Mapps! to search the globe and if you get lost, find yourself!
 
 ### Adding and Editing pins

@@ -37,6 +37,27 @@ module.exports = (db) => {
     });
   });
 
+  router.patch("/:id", (req, res) => {
+    db.query(
+      `SELECT * FROM locations
+    WHERE id = $1  
+    ;`,
+      [req.params.id]
+    ).then((data) => {
+      const public = data.rows[0].ispublic;
+
+      db.query(
+        `UPDATE locations
+      SET isPublic = $1
+      WHERE id = $2 RETURNING *;
+      `,
+        [!public, req.params.id]
+      ).then((data) => {
+        res.json(data.rows);
+      });
+    });
+  });
+
   router.delete("/:id", (req, res) => {
     db.query(
       `

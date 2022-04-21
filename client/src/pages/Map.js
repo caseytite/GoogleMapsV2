@@ -12,6 +12,7 @@ import "@reach/combobox/styles.css";
 import "../styles/Map.css";
 import axios from "axios";
 import Input from "../components/UI/Input";
+import { Switch } from "@mui/material";
 
 const mapContainerStyle = {
   width: "100vw",
@@ -40,6 +41,7 @@ const Map = React.memo((props) => {
   const [info, setInfo] = useState(null);
   const [addDescription, setAddDescription] = useState(false);
   const [pointFilter, setPointFilter] = useState("");
+  const [isPublic, setIsPublic] = useState(false);
 
   const [state, setState] = useState({
     title: "",
@@ -66,6 +68,13 @@ const Map = React.memo((props) => {
       description: "",
       tags: "",
     }));
+  };
+
+  const handlePublicSwitch = (id) => {
+    axios
+      .patch(`/locations/${id.id}`)
+      .then((res) => setIsPublic(res.data[0].ispublic))
+      .catch((e) => console.log(e, "Fail"));
   };
 
   const editMarker = (title, description, id, tags) => {
@@ -115,7 +124,7 @@ const Map = React.memo((props) => {
 
   if (loadError) return "Error on map load";
   if (!isLoaded) return "Loading maps";
-  console.log(points);
+
   const pointSpots = points
     .filter((point) => {
       const regex = new RegExp(pointFilter, "gi");
@@ -134,7 +143,6 @@ const Map = React.memo((props) => {
         }}
       />
     ));
-  console.log("info", info);
 
   return (
     <div className="map-container">
@@ -173,7 +181,15 @@ const Map = React.memo((props) => {
               )}
               {addDescription && (
                 <div className="inputs">
-                  <h3>Add Title</h3>
+                  <span>
+                    <h3>Add Title</h3>
+                    <Switch
+                      size="small"
+                      onClick={() => handlePublicSwitch(info)}
+                      checked={isPublic}
+                    />
+                  </span>
+
                   <Input
                     value={state.title}
                     onChange={(e) => {
