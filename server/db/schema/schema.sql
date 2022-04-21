@@ -13,10 +13,10 @@ CREATE TABLE locations (
   id SERIAL PRIMARY KEY NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   time TIMESTAMP,
-  description VARCHAR(255),
+  description VARCHAR(255) DEFAULT 'description',
   lat VARCHAR(255) NOT NULL,
   lng VARCHAR(255) NOT NULL,
   title VARCHAR(255) NOT NULL DEFAULT 'New Pin',
-  tags VARCHAR(255) ,
+  tags VARCHAR(255) DEFAULT 'tag',
   isPublic BOOLEAN DEFAULT FALSE
 );

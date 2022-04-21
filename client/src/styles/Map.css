@@ -1,8 +1,9 @@
 .inputs {
   display: flex;
   flex-direction: column;
-  height: 175px;
+  height: 200px;
   justify-content: space-around;
+  font-family: var(--std-font);
 }
 
 .inputs > *:focus {
@@ -16,6 +17,15 @@
 }
 .inputs > button:hover {
   cursor: pointer;
+}
+.inputs > input {
+  width: 90%;
+}
+.switch {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: -12px 0;
 }
 
 .point-search {
@@ -37,10 +47,10 @@
 }
 .edit-delete {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 .edit-delete > button {
   margin-top: 5px;
-  margin-left: 10px;
+
   height: 20px;
 }

@@ -42,6 +42,7 @@ const Map = React.memo((props) => {
   const [addDescription, setAddDescription] = useState(false);
   const [pointFilter, setPointFilter] = useState("");
   const [isPublic, setIsPublic] = useState(false);
+  const color = isPublic ? "warning" : "default";
 
   const [state, setState] = useState({
     title: "",
@@ -181,14 +182,16 @@ const Map = React.memo((props) => {
               )}
               {addDescription && (
                 <div className="inputs">
-                  <span>
-                    <h3>Add Title</h3>
+                  <span className="switch">
+                    <h3>{`Set ${isPublic ? "Private" : "Public"} `}</h3>
                     <Switch
                       size="small"
                       onClick={() => handlePublicSwitch(info)}
                       checked={isPublic}
+                      color={color}
                     />
                   </span>
+                  <h3>Add Title</h3>
 
                   <Input
                     value={state.title}
