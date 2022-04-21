@@ -37,11 +37,11 @@ const Map = React.memo((props) => {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
   });
-
   const [info, setInfo] = useState(null);
   const [addDescription, setAddDescription] = useState(false);
   const [pointFilter, setPointFilter] = useState("");
-  const [isPublic, setIsPublic] = useState(false);
+
+  const [isPublic, setIsPublic] = useState("");
   const color = isPublic ? "warning" : "default";
 
   const [state, setState] = useState({
@@ -50,13 +50,13 @@ const Map = React.memo((props) => {
     tags: "",
   });
 
-  const onMapClick = useCallback((event) => {
+  const onMapClick = (event) => {
     const lat = event.latLng.lat();
     const lng = event.latLng.lng();
 
     updateMarker(lat, lng);
-    setAddDescription(false);
-  }, []);
+    // setAddDescription(false);
+  };
 
   const updateMarker = (lat, lng) => {
     axios
@@ -141,6 +141,7 @@ const Map = React.memo((props) => {
         animation={2}
         onClick={() => {
           setInfo(point);
+          setIsPublic(point.ispublic);
         }}
       />
     ));
@@ -174,7 +175,11 @@ const Map = React.memo((props) => {
                   <p>Created {new Date(info.time).toDateString()}</p>
                   {info.description && <p>{info.description}</p>}
                   {vaildateUsersPin(user, info) && (
-                    <button onClick={() => setAddDescription(true)}>
+                    <button
+                      onClick={() =>
+                        setAddDescription(true) && setIsPublic(info.ispublic)
+                      }
+                    >
                       Edit Details
                     </button>
                   )}
@@ -187,8 +192,6 @@ const Map = React.memo((props) => {
                     <Switch
                       size="small"
                       onClick={() => handlePublicSwitch(info)}
-                      checked={isPublic}
-                      color={color}
                     />
                   </span>
                   <h3>Add Title</h3>

@@ -48,9 +48,9 @@
 .edit-delete {
   display: flex;
   justify-content: space-between;
+  width: 95%;
 }
 .edit-delete > button {
   margin-top: 5px;
-
   height: 20px;
 }
