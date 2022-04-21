@@ -7,12 +7,13 @@ import {
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
-import { styles } from "../mapStyles/mapStyles";
+import { styles, altStyle } from "../mapStyles/mapStyles";
 import "@reach/combobox/styles.css";
 import "../styles/Map.css";
 import axios from "axios";
 import Input from "../components/UI/Input";
 import { Switch } from "@mui/material";
+import Button from "../components/UI/Button";
 
 const mapContainerStyle = {
   width: "100vw",
@@ -24,13 +25,13 @@ const defaultLocation = {
   lng: -123.365646,
 };
 
-const options = {
-  styles,
-  disableDefaultUI: true,
-  zoomControl: true,
-};
-
 const Map = React.memo((props) => {
+  const [style, setStyle] = useState(styles);
+  const options = {
+    styles: style,
+    disableDefaultUI: true,
+    zoomControl: true,
+  };
   const { points, setPoints, user } = props;
   const [libraries] = useState(["places"]);
   const { isLoaded, loadError } = useLoadScript({
@@ -150,6 +151,12 @@ const Map = React.memo((props) => {
     <div className="map-container">
       <Search moveTo={moveTo} />
       <LocateUser moveTo={moveTo} />
+      <Button
+        onClick={() =>
+          style === styles ? setStyle(altStyle) : setStyle(styles)
+        }
+        children={"Change Style"}
+      />
 
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
