@@ -30,7 +30,7 @@ const options = {
 };
 
 const Map = React.memo((props) => {
-  const { points, setPoints } = props;
+  const { points, setPoints, user } = props;
   const [libraries] = useState(["places"]);
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -99,6 +99,10 @@ const Map = React.memo((props) => {
     });
   };
 
+  const vaildateUsersPin = (user, info) => {
+    return user.id === info.user_id ? true : false;
+  };
+
   const mapReference = useRef();
   const onMapLoad = useCallback((map) => {
     mapReference.current = map;
@@ -111,15 +115,15 @@ const Map = React.memo((props) => {
 
   if (loadError) return "Error on map load";
   if (!isLoaded) return "Loading maps";
-
+  console.log(points);
   const pointSpots = points
     .filter((point) => {
       const regex = new RegExp(pointFilter, "gi");
-      return regex.test(point.title || point.tags);
+      return regex.test(point.title) || regex.test(point.tags);
     })
     .map((point) => (
       <Marker
-        key={point.time}
+        key={point.id}
         position={{
           lat: +point.lat,
           lng: +point.lng,
@@ -130,6 +134,7 @@ const Map = React.memo((props) => {
         }}
       />
     ));
+  console.log("info", info);
 
   return (
     <div className="map-container">
@@ -159,9 +164,11 @@ const Map = React.memo((props) => {
                   <h2>{!info.title ? "Your new pin!" : info.title} </h2>
                   <p>Created {new Date(info.time).toDateString()}</p>
                   {info.description && <p>{info.description}</p>}
-                  <button onClick={() => setAddDescription(true)}>
-                    Edit Details
-                  </button>
+                  {vaildateUsersPin(user, info) && (
+                    <button onClick={() => setAddDescription(true)}>
+                      Edit Details
+                    </button>
+                  )}
                 </div>
               )}
               {addDescription && (

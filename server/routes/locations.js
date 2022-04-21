@@ -5,7 +5,9 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     db.query(
       `SELECT * FROM locations
-      WHERE user_id = $1;`,
+      WHERE user_id = $1
+      OR isPublic = true
+      ;`,
       [req.session.id]
     ).then((data) => {
       res.json(data.rows);

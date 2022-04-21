@@ -23,7 +23,7 @@ const App = () => {
     <>
       <Header user={user} />
       <div className="map-page">
-        <Map points={points} setPoints={setPoints} />
+        <Map points={points} setPoints={setPoints} user={user} />
         {user && <h1>{user.first_name}'s Locations</h1>}
         {!user && <h1>Your Locations</h1>}
       </div>
