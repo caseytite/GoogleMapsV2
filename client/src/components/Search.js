@@ -1,3 +1,4 @@
+import React from "react";
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
@@ -63,4 +64,4 @@ const Search = (props) => {
   );
 };
 
-export default Search;
+export default React.memo(Search);

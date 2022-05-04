@@ -25,14 +25,14 @@ const defaultLocation = {
   lng: -123.365646,
 };
 
-const Map = React.memo((props) => {
+const Map = ({ points, setPoints, user }) => {
   const [style, setStyle] = useState(styles);
   const options = {
     styles: style,
     disableDefaultUI: true,
     zoomControl: true,
   };
-  const { points, setPoints, user } = props;
+
   const [libraries] = useState(["places"]);
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -43,7 +43,6 @@ const Map = React.memo((props) => {
   const [pointFilter, setPointFilter] = useState("");
 
   const [isPublic, setIsPublic] = useState("");
-  // const color = isPublic ? "warning" : "default";
 
   const [state, setState] = useState({
     title: "",
@@ -94,43 +93,49 @@ const Map = React.memo((props) => {
         .then((res) => setIsPublic(res.ispublic))
         .catch((e) => console.log(e, "Fail"));
     },
-    [setIsPublic]
+    [setIsPublic, setPoints]
   );
 
-  const editMarker = (title, description, id, tags) => {
-    axios
-      .put(`/locations/${id}`, { title, description, tags })
-      .then((res) => {
+  const editMarker = useCallback(
+    (title, description, id, tags) => {
+      axios
+        .put(`/locations/${id}`, { title, description, tags })
+        .then((res) => {
+          setAddDescription(false);
+          setState((prev) => ({
+            title: "",
+            description: "",
+            tags: "",
+          }));
+
+          return res;
+        })
+        .then((res) => {
+          const otherMarkers = points.filter(
+            (marker) => marker.time !== info.time
+          );
+          setInfo(null);
+          setPoints([...otherMarkers, ...res.data]);
+          setInfo(...res.data);
+        });
+    },
+    [info?.time, points, setPoints]
+  );
+
+  const deleteMarker = useCallback(
+    (id) => {
+      axios.delete(`/locations/${id}`).then((res) => {
         setAddDescription(false);
-        setState((prev) => ({
-          title: "",
-          description: "",
-          tags: "",
-        }));
-
-        return res;
-      })
-      .then((res) => {
-        const otherMarkers = points.filter(
-          (marker) => marker.time !== info.time
-        );
         setInfo(null);
-        setPoints([...otherMarkers, ...res.data]);
-        setInfo(...res.data);
+        setPoints([...res.data]);
       });
-  };
+    },
+    [setPoints]
+  );
 
-  const deleteMarker = (id) => {
-    axios.delete(`/locations/${id}`).then((res) => {
-      setAddDescription(false);
-      setInfo(null);
-      setPoints([...res.data]);
-    });
-  };
-
-  const vaildateUsersPin = (user, info) => {
+  const vaildateUsersPin = useCallback((user, info) => {
     return user.id === info.user_id ? true : false;
-  };
+  }, []);
 
   const mapReference = useRef();
   const onMapLoad = useCallback((map) => {
@@ -173,7 +178,8 @@ const Map = React.memo((props) => {
         onClick={() =>
           style === styles ? setStyle(altStyle) : setStyle(styles)
         }
-        children={"Change Style"}
+        children={"Style!"}
+        btnClass={"change-style"}
       />
 
       <GoogleMap
@@ -218,6 +224,7 @@ const Map = React.memo((props) => {
                       size="small"
                       onClick={() => handlePublicSwitch(info)}
                       checked={isPublic}
+                      color={isPublic ? "warning" : "default"}
                     />
                   </span>
                   <h3>Add Title</h3>
@@ -285,6 +292,6 @@ const Map = React.memo((props) => {
       </GoogleMap>
     </div>
   );
-});
+};
 
-export default Map;
+export default React.memo(Map);

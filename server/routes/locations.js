@@ -20,7 +20,7 @@ module.exports = (db) => {
       VALUES ($1,now(),$2,$3) RETURNING *`,
       [req.session.id, req.body.lat.toString(), req.body.lng.toString()]
     ).then((data) => {
-      console.log("data", data.rows);
+      // console.log("data", data.rows);
       res.json(data.rows);
     });
   });

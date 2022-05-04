@@ -3,25 +3,6 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 
 module.exports = (db) => {
-  // router.post("/login", (req, res) => {
-  //   const { email, password } = req.body;
-
-  //   db.query(
-  //     `SELECT * FROM users
-  //     WHERE email = $1 AND password = $2`,
-  //     [email.toLowerCase(), password]
-  //   )
-  //     .then((data) => {
-  //       const user = data.rows;
-  //       req.session.id = user[0].id;
-  //       res.json({
-  //         data: data.rows,
-  //         user: user[0],
-  //       });
-  //     })
-  //     .catch((err) => res.json({ error: err.message }));
-  // });
-
   router.post("/login", (req, res) => {
     const { email, password } = req.body;
     if (email === "casey@email.com" || email === "owen@email.com") {
@@ -50,7 +31,7 @@ module.exports = (db) => {
         [email.toLowerCase()]
       )
         .then((data) => {
-          console.log("db password", data.rows[0].password);
+          // console.log("db password", data.rows[0].password);
           if (data) {
             const validPassword = bcrypt.compareSync(
               password,
@@ -100,7 +81,7 @@ module.exports = (db) => {
   router.post("/register", (req, res) => {
     const { email, password, firstName, lastName } = req.body;
     const hash = bcrypt.hashSync(password, 10);
-    console.log("reg hash", hash);
+    // console.log("reg hash", hash);
     db.query(
       `INSERT INTO users (first_name,last_name,email,password)
       VALUES ($1,$2,$3,$4) RETURNING *`,
@@ -109,17 +90,6 @@ module.exports = (db) => {
       res.json(data.rows);
     });
   });
-
-  // router.post("/register", (req, res) => {
-  //   const { firstName, lastName, email, password } = req.body;
-  //   db.query(
-  //     `INSERT INTO users (first_name,last_name,email,password)
-  //     VALUES ($1,$2,$3,$4) RETURNING *`,
-  //     [firstName, lastName, email.toLowerCase(), password]
-  //   ).then((data) => {
-  //     res.json(data.rows);
-  //   });
-  // });
 
   return router;
 };
