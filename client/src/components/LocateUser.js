@@ -2,9 +2,7 @@ import React from "react";
 import "@reach/combobox/styles.css";
 import "../styles/LocateUser.css";
 
-const LocateUser = (props) => {
-  const { moveTo } = props;
-
+const LocateUser = ({ moveTo }) => {
   return (
     <button
       className="locate"

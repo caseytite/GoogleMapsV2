@@ -13,9 +13,7 @@ import {
 import "@reach/combobox/styles.css";
 import "../styles/Search.css";
 
-const Search = (props) => {
-  const { moveTo } = props;
-
+const Search = ({ moveTo }) => {
   const {
     ready,
     value,

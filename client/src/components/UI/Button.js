@@ -1,10 +1,9 @@
 import "../../styles/Button.css";
 
-const Button = (props) => {
-  const { btnClass } = props;
+const Button = ({ btnClass, onClick, children }) => {
   return (
-    <button onClick={props.onClick} className={btnClass ? btnClass : "button"}>
-      {props.children}
+    <button onClick={onClick} className={btnClass ? btnClass : "button"}>
+      {children}
     </button>
   );
 };

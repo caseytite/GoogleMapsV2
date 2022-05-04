@@ -50,7 +50,6 @@ const Map = ({ points, setPoints, user }) => {
     tags: "",
   });
 
-  console.log("render");
   const updateMarker = useCallback(
     (lat, lng) => {
       axios
@@ -69,11 +68,13 @@ const Map = ({ points, setPoints, user }) => {
 
   const onMapClick = useCallback(
     (event) => {
+      if (event.placeId) {
+        return;
+      }
       const lat = event.latLng.lat();
       const lng = event.latLng.lng();
 
       updateMarker(lat, lng);
-      // setAddDescription(false);
     },
     [updateMarker]
   );
@@ -82,7 +83,6 @@ const Map = ({ points, setPoints, user }) => {
     (id) => {
       axios
         .patch(`/locations/${id.id}`)
-        // .then((res) => console.log(res.data))
         .then((res) => {
           setPoints((prev) => [
             ...prev.filter((point) => point.id !== id.id),
@@ -115,7 +115,10 @@ const Map = ({ points, setPoints, user }) => {
             (marker) => marker.time !== info.time
           );
           setInfo(null);
-          setPoints([...otherMarkers, ...res.data]);
+          setPoints((prev) => [
+            ...prev.filter((marker) => marker.time !== info.time),
+            ...res.data,
+          ]);
           setInfo(...res.data);
         });
     },
@@ -238,6 +241,7 @@ const Map = ({ points, setPoints, user }) => {
                       }));
                     }}
                     placeholder={"Title"}
+                    required={true}
                   />
                   <h3>Add Description</h3>
                   <Input
@@ -249,6 +253,7 @@ const Map = ({ points, setPoints, user }) => {
                       }))
                     }
                     placeholder={"Description"}
+                    required={true}
                   />
                   <h3>Add Tags</h3>
                   <Input
@@ -260,17 +265,23 @@ const Map = ({ points, setPoints, user }) => {
                       }))
                     }
                     placeholder={"Add Tags"}
+                    required={true}
                   />
                   <div className="edit-delete">
                     <button
-                      onClick={() =>
-                        editMarker(
-                          state.title,
-                          state.description,
-                          info.id,
-                          state.tags
-                        )
-                      }
+                      onClick={() => {
+                        {
+                          state.title &&
+                            state.description &&
+                            state.tags &&
+                            editMarker(
+                              state.title,
+                              state.description,
+                              info.id,
+                              state.tags
+                            );
+                        }
+                      }}
                     >
                       Save
                     </button>
