@@ -43,7 +43,7 @@ const Map = React.memo((props) => {
   const [pointFilter, setPointFilter] = useState("");
 
   const [isPublic, setIsPublic] = useState("");
-  const color = isPublic ? "warning" : "default";
+  // const color = isPublic ? "warning" : "default";
 
   const [state, setState] = useState({
     title: "",
@@ -51,33 +51,51 @@ const Map = React.memo((props) => {
     tags: "",
   });
 
-  const onMapClick = (event) => {
-    const lat = event.latLng.lat();
-    const lng = event.latLng.lng();
+  console.log("render");
+  const updateMarker = useCallback(
+    (lat, lng) => {
+      axios
+        .post("/locations", { lat, lng })
+        .then((res) => setPoints((prev) => [...prev, ...res.data]));
 
-    updateMarker(lat, lng);
-    // setAddDescription(false);
-  };
+      setAddDescription(false);
+      setState((prev) => ({
+        title: "",
+        description: "",
+        tags: "",
+      }));
+    },
+    [setPoints]
+  );
 
-  const updateMarker = (lat, lng) => {
-    axios
-      .post("/locations", { lat, lng })
-      .then((res) => setPoints((prev) => [...prev, ...res.data]));
+  const onMapClick = useCallback(
+    (event) => {
+      const lat = event.latLng.lat();
+      const lng = event.latLng.lng();
 
-    setAddDescription(false);
-    setState((prev) => ({
-      title: "",
-      description: "",
-      tags: "",
-    }));
-  };
+      updateMarker(lat, lng);
+      // setAddDescription(false);
+    },
+    [updateMarker]
+  );
 
-  const handlePublicSwitch = (id) => {
-    axios
-      .patch(`/locations/${id.id}`)
-      .then((res) => setIsPublic(res.data[0].ispublic))
-      .catch((e) => console.log(e, "Fail"));
-  };
+  const handlePublicSwitch = useCallback(
+    (id) => {
+      axios
+        .patch(`/locations/${id.id}`)
+        // .then((res) => console.log(res.data))
+        .then((res) => {
+          setPoints((prev) => [
+            ...prev.filter((point) => point.id !== id.id),
+            res.data[0],
+          ]);
+          return res.data[0];
+        })
+        .then((res) => setIsPublic(res.ispublic))
+        .catch((e) => console.log(e, "Fail"));
+    },
+    [setIsPublic]
+  );
 
   const editMarker = (title, description, id, tags) => {
     axios
@@ -199,6 +217,7 @@ const Map = React.memo((props) => {
                     <Switch
                       size="small"
                       onClick={() => handlePublicSwitch(info)}
+                      checked={isPublic}
                     />
                   </span>
                   <h3>Add Title</h3>
