@@ -20,7 +20,7 @@ render(
         <Route path="map" element={<App />} />
         <Route path="register" element={<Register />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </LoggedInUser.Provider>
   </BrowserRouter>,
 

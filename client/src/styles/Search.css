@@ -18,3 +18,9 @@
 .search input:hover {
   box-shadow: var(--box-shadow);
 }
+
+@media (max-width: 760px) {
+  .search {
+    width: 75%;
+  }
+}

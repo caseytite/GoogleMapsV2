@@ -1,10 +1,11 @@
 import React from "react";
+import Button from "./UI/Button";
 import "@reach/combobox/styles.css";
 import "../styles/LocateUser.css";
 
 const LocateUser = ({ moveTo }) => {
   return (
-    <button
+    <Button
       className="locate"
       onClick={() => {
         navigator.geolocation.getCurrentPosition(
@@ -19,7 +20,7 @@ const LocateUser = ({ moveTo }) => {
       }}
     >
       Locate Me!
-    </button>
+    </Button>
   );
 };
 

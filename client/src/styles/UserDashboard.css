@@ -1,0 +1,41 @@
+.dashboard-hdr {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 1em;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: flex-end;
+  margin: 1em;
+}
+
+.point-search {
+  border: 0.5px solid black;
+  width: 100%;
+  max-width: 205px;
+  z-index: 10;
+  height: 25px;
+  margin: 1em;
+  font-size: larger;
+  border-radius: var(--border-radius);
+  padding: 5px;
+  cursor: pointer;
+}
+.point-search:hover {
+  box-shadow: var(--box-shadow);
+}
+hr {
+  border: 1px solid rgb(201, 195, 195);
+  width: 99%;
+}
+
+@media (max-width: 580px) {
+  .btn-container {
+    flex-direction: column;
+  }
+  .point-search {
+    display: flex;
+    margin: auto;
+  }
+}

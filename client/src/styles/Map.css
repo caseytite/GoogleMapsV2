@@ -28,23 +28,6 @@
   margin: -12px 0;
 }
 
-.point-search {
-  position: absolute;
-  width: 100%;
-  max-width: 205px;
-  z-index: 10;
-  height: 25px;
-  bottom: 0;
-  margin: 3px 10px;
-  font-size: larger;
-  border-radius: var(--border-radius);
-  border: 0.5px solid black;
-  padding: 5px;
-  cursor: pointer;
-}
-.point-search:hover {
-  box-shadow: var(--box-shadow);
-}
 .edit-delete {
   display: flex;
   justify-content: space-between;

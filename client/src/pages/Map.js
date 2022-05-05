@@ -7,13 +7,15 @@ import {
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
-import { styles, altStyle } from "../mapStyles/mapStyles";
+// import { styles, altStyle } from "../mapStyles/mapStyles";
+import { mapStyles } from "../mapStyles/mapStyles";
 import "@reach/combobox/styles.css";
 import "../styles/Map.css";
 import axios from "axios";
 import Input from "../components/UI/Input";
 import { Switch } from "@mui/material";
 import Button from "../components/UI/Button";
+import UserDashboard from "../components/UserDashboard";
 
 const mapContainerStyle = {
   width: "100vw",
@@ -25,8 +27,8 @@ const defaultLocation = {
   lng: -123.365646,
 };
 
-const Map = ({ points, setPoints, user }) => {
-  const [style, setStyle] = useState(styles);
+const Map = ({ points, setPoints, user, changeStyle, style, setStyle }) => {
+  // const [style, setStyle] = useState();
   const options = {
     styles: style,
     disableDefaultUI: true,
@@ -145,6 +147,12 @@ const Map = ({ points, setPoints, user }) => {
     mapReference.current = map;
   }, []);
 
+  // const changeStyle = (styles) => {
+  //   const removeStyle = styles.shift();
+  //   styles.push(removeStyle);
+  //   setStyle(styles[0]);
+  // };
+
   const moveTo = useCallback(({ lat, lng }) => {
     mapReference.current.panTo({ lat, lng });
     mapReference.current.setZoom(15);
@@ -176,14 +184,6 @@ const Map = ({ points, setPoints, user }) => {
   return (
     <div className="map-container">
       <Search moveTo={moveTo} />
-      <LocateUser moveTo={moveTo} />
-      <Button
-        onClick={() =>
-          style === styles ? setStyle(altStyle) : setStyle(styles)
-        }
-        children={"Style!"}
-        btnClass={"change-style"}
-      />
 
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
@@ -194,6 +194,7 @@ const Map = ({ points, setPoints, user }) => {
         options={options}
       >
         {pointSpots}
+
         {info ? (
           <InfoWindow
             position={{ lat: +info.lat, lng: +info.lng }}
@@ -230,7 +231,7 @@ const Map = ({ points, setPoints, user }) => {
                       color={isPublic ? "warning" : "default"}
                     />
                   </span>
-                  <h3>Add Title</h3>
+                  <h3>Title</h3>
 
                   <Input
                     value={state.title}
@@ -243,7 +244,7 @@ const Map = ({ points, setPoints, user }) => {
                     placeholder={"Title"}
                     required={true}
                   />
-                  <h3>Add Description</h3>
+                  <h3>Description</h3>
                   <Input
                     value={state.description}
                     onChange={(e) =>
@@ -255,7 +256,7 @@ const Map = ({ points, setPoints, user }) => {
                     placeholder={"Description"}
                     required={true}
                   />
-                  <h3>Add Tags</h3>
+                  <h3>Tags</h3>
                   <Input
                     value={state.tags}
                     onChange={(e) =>
@@ -294,13 +295,16 @@ const Map = ({ points, setPoints, user }) => {
             </div>
           </InfoWindow>
         ) : null}
-        <Input
-          className="point-search"
-          value={pointFilter}
-          onChange={setPointFilter}
-          placeholder={"Filter Locations - Tags"}
-        />
       </GoogleMap>
+      <UserDashboard
+        style={style}
+        setStyle={setStyle}
+        pointFilter={pointFilter}
+        setPointFilter={setPointFilter}
+        moveTo={moveTo}
+        user={user}
+        changeStyle={changeStyle}
+      />
     </div>
   );
 };

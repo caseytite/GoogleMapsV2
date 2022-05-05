@@ -4,16 +4,17 @@
   height: 40px;
   border-radius: var(--border-radius);
   color: var(--std-text);
-  font-size: 20px;
+  font-size: 16px;
   cursor: pointer;
+  margin-left: 0.5em;
 }
 .button:hover {
   width: 95px;
   height: 38px;
-  font-size: 19px;
+  font-size: 15px;
   margin-right: 2px;
 }
-.change-style {
+/* .change-style {
   background-color: var(--btn-background);
   width: 100px;
   height: 40px;
@@ -25,4 +26,4 @@
   z-index: 10;
   margin-top: 1em;
   margin-left: 1em;
-}
+} */
