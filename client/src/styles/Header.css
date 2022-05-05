@@ -16,3 +16,7 @@
   text-decoration: underline;
   cursor: pointer;
 }
+.user-name {
+  display: flex;
+  align-items: center;
+}

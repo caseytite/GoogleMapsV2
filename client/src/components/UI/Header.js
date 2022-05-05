@@ -65,7 +65,14 @@ const Header = ({ user, style }) => {
             }}
           />
         </div>
-        {user && <Button onClick={handleLogout}>Logout</Button>}
+        {user && (
+          <div className="user-name">
+            <h2 style={{ color: `${findWaterColor(style)[1]}` }}>
+              Hello {user.first_name}!
+            </h2>
+            <Button onClick={handleLogout}>Logout</Button>
+          </div>
+        )}
         {!user && <Button onClick={goToLogin}>Login</Button>}
       </header>
     </div>

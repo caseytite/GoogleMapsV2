@@ -1,20 +1,16 @@
 import React, { useState, useCallback, useRef } from "react";
 import Search from "../components/Search";
-import LocateUser from "../components/LocateUser";
 import {
   GoogleMap,
   useLoadScript,
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
-// import { styles, altStyle } from "../mapStyles/mapStyles";
-import { mapStyles } from "../mapStyles/mapStyles";
 import "@reach/combobox/styles.css";
 import "../styles/Map.css";
 import axios from "axios";
 import Input from "../components/UI/Input";
 import { Switch } from "@mui/material";
-import Button from "../components/UI/Button";
 import UserDashboard from "../components/UserDashboard";
 
 const mapContainerStyle = {
@@ -28,7 +24,6 @@ const defaultLocation = {
 };
 
 const Map = ({ points, setPoints, user, changeStyle, style, setStyle }) => {
-  // const [style, setStyle] = useState();
   const options = {
     styles: style,
     disableDefaultUI: true,
@@ -113,9 +108,6 @@ const Map = ({ points, setPoints, user, changeStyle, style, setStyle }) => {
           return res;
         })
         .then((res) => {
-          const otherMarkers = points.filter(
-            (marker) => marker.time !== info.time
-          );
           setInfo(null);
           setPoints((prev) => [
             ...prev.filter((marker) => marker.time !== info.time),
@@ -124,7 +116,7 @@ const Map = ({ points, setPoints, user, changeStyle, style, setStyle }) => {
           setInfo(...res.data);
         });
     },
-    [info?.time, points, setPoints]
+    [info?.time, setPoints]
   );
 
   const deleteMarker = useCallback(
@@ -147,12 +139,6 @@ const Map = ({ points, setPoints, user, changeStyle, style, setStyle }) => {
     mapReference.current = map;
   }, []);
 
-  // const changeStyle = (styles) => {
-  //   const removeStyle = styles.shift();
-  //   styles.push(removeStyle);
-  //   setStyle(styles[0]);
-  // };
-
   const moveTo = useCallback(({ lat, lng }) => {
     mapReference.current.panTo({ lat, lng });
     mapReference.current.setZoom(15);
@@ -161,7 +147,7 @@ const Map = ({ points, setPoints, user, changeStyle, style, setStyle }) => {
   if (loadError) return "Error on map load";
   if (!isLoaded) return "Loading maps";
 
-  const pointSpots = points
+  const usersPins = points
     .filter((point) => {
       const regex = new RegExp(pointFilter, "gi");
       return regex.test(point.title) || regex.test(point.tags);
@@ -193,7 +179,7 @@ const Map = ({ points, setPoints, user, changeStyle, style, setStyle }) => {
         onLoad={onMapLoad}
         options={options}
       >
-        {pointSpots}
+        {usersPins}
 
         {info ? (
           <InfoWindow
@@ -271,17 +257,15 @@ const Map = ({ points, setPoints, user, changeStyle, style, setStyle }) => {
                   <div className="edit-delete">
                     <button
                       onClick={() => {
-                        {
-                          state.title &&
-                            state.description &&
-                            state.tags &&
-                            editMarker(
-                              state.title,
-                              state.description,
-                              info.id,
-                              state.tags
-                            );
-                        }
+                        state.title &&
+                          state.description &&
+                          state.tags &&
+                          editMarker(
+                            state.title,
+                            state.description,
+                            info.id,
+                            state.tags
+                          );
                       }}
                     >
                       Save

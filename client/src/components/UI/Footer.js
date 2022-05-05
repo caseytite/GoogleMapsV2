@@ -31,7 +31,7 @@ const Footer = ({ style }) => {
             color: `${findWaterColor(style)[1]}`,
           }}
         >
-          Mapps!
+          <u>Mapps!</u>
         </h2>
         <AddLocationAltIcon
           sx={{
