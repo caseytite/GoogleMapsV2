@@ -2,7 +2,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 275px;
+  /* padding-top: 275px; */
+  padding-top: 15rem;
   color: var(--std-text);
   font-size: x-large;
 }
@@ -11,4 +12,16 @@
   background-size: cover;
   min-height: 1000px;
   position: initial;
+}
+
+@media (max-width: 680px) {
+  .welcome {
+    flex-direction: column;
+    padding-top: 8rem;
+  }
+  .welcome > h1 {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
 }

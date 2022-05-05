@@ -36,3 +36,15 @@
   align-self: flex-start;
   margin-left: -25px;
 }
+
+@media (max-height: 680px) {
+  .reg-container {
+    margin-top: 0;
+  }
+  .reg-form > h1 {
+    font-size: xx-large;
+  }
+  .reg-form > label {
+    font-size: x-large;
+  }
+}
