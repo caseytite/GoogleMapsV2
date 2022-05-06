@@ -8,18 +8,21 @@ const UserDashboard = ({
   pointFilter,
   setPointFilter,
   moveTo,
-  user,
   changeStyle,
+  info,
 }) => {
   return (
     <>
       <div className="dashboard-hdr">
-        <Input
-          className="point-search"
-          value={pointFilter}
-          onChange={setPointFilter}
-          placeholder={"Filter Locations - Tags"}
-        />
+        <div className="location-filter">
+          <h2>Search your locations!</h2>
+          <Input
+            className="point-search"
+            value={pointFilter}
+            onChange={setPointFilter}
+            placeholder={"Filter Locations - Tags"}
+          />
+        </div>
         <div className="btn-container">
           <Button
             onClick={() => {
@@ -31,6 +34,9 @@ const UserDashboard = ({
         </div>
       </div>
       <hr />
+      {info?.title && <p>{info.title}</p>}
+      {info?.description && <p>{info.description}</p>}
+      {info?.tags && <p>{info.tags}</p>}
     </>
   );
 };

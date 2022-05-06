@@ -7,6 +7,7 @@
   font-size: 16px;
   cursor: pointer;
   margin-left: 0.5em;
+  font-family: var(--std-font);
 }
 .button:hover {
   width: 95px;

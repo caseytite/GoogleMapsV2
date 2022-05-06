@@ -286,8 +286,8 @@ const Map = ({ points, setPoints, user, changeStyle, style, setStyle }) => {
         pointFilter={pointFilter}
         setPointFilter={setPointFilter}
         moveTo={moveTo}
-        user={user}
         changeStyle={changeStyle}
+        info={info}
       />
     </div>
   );

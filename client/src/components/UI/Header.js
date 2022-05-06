@@ -49,13 +49,9 @@ const Header = ({ user, style }) => {
       <header className="header">
         <div className="title">
           {user && (
-            <h1
-              style={{
-                color: `${findWaterColor(style)[1]}`,
-              }}
-            >
-              Mapps!
-            </h1>
+            <h2 style={{ color: `${findWaterColor(style)[1]}` }}>
+              Hello {user.first_name}!
+            </h2>
           )}
           {!user && <h1 onClick={handleLanding}>Mapps!</h1>}
           <AddLocationAltIcon
@@ -67,9 +63,6 @@ const Header = ({ user, style }) => {
         </div>
         {user && (
           <div className="user-name">
-            <h2 style={{ color: `${findWaterColor(style)[1]}` }}>
-              Hello {user.first_name}!
-            </h2>
             <Button onClick={handleLogout}>Logout</Button>
           </div>
         )}

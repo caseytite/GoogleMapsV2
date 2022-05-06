@@ -25,6 +25,13 @@
 .point-search:hover {
   box-shadow: var(--box-shadow);
 }
+.location-filter > h2 {
+  margin-left: 15px;
+}
+.location-filter > * {
+  margin-bottom: 0;
+  margin-top: 10px;
+}
 hr {
   border: 1px solid rgb(201, 195, 195);
   width: 99%;
