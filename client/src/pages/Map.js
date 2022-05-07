@@ -5,7 +5,7 @@ import "@reach/combobox/styles.css";
 import "../styles/Map.css";
 import axios from "axios";
 import UserDashboard from "../components/UserDashboard";
-import Window from "../components/InfoWindow";
+import PopUpWindow from "../components/PopUpWindow";
 
 const mapContainerStyle = {
   width: "100vw",
@@ -115,7 +115,7 @@ const Map = ({ points, setPoints, user, changeStyle, style, setStyle }) => {
         options={options}
       >
         {usersPins}
-        <Window
+        <PopUpWindow
           addDescription={addDescription}
           setAddDescription={setAddDescription}
           info={info}

@@ -3,7 +3,7 @@ import { InfoWindow } from "@react-google-maps/api";
 import InfoWindowForm from "./InfoWindowForm";
 import axios from "axios";
 
-const Window = ({
+const PopUpWindow = ({
   addDescription,
   setAddDescription,
   info,
@@ -102,4 +102,4 @@ const Window = ({
   );
 };
 
-export default Window;
+export default PopUpWindow;
