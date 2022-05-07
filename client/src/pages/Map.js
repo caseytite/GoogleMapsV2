@@ -70,64 +70,6 @@ const Map = ({ points, setPoints, user, changeStyle, style, setStyle }) => {
     [updateMarker]
   );
 
-  const handlePublicSwitch = useCallback(
-    (id) => {
-      axios
-        .patch(`/locations/${id.id}`)
-        .then((res) => {
-          setPoints((prev) => [
-            ...prev.filter((point) => point.id !== id.id),
-            res.data[0],
-          ]);
-          return res.data[0];
-        })
-        .then((res) => setIsPublic(res.ispublic))
-        .catch((e) => console.log(e, "Fail"));
-    },
-    [setIsPublic, setPoints]
-  );
-
-  const editMarker = useCallback(
-    (title, description, id, tags) => {
-      axios
-        .put(`/locations/${id}`, { title, description, tags })
-        .then((res) => {
-          setAddDescription(false);
-          setState((prev) => ({
-            title: "",
-            description: "",
-            tags: "",
-          }));
-
-          return res;
-        })
-        .then((res) => {
-          setInfo(null);
-          setPoints((prev) => [
-            ...prev.filter((marker) => marker.time !== info.time),
-            ...res.data,
-          ]);
-          setInfo(...res.data);
-        });
-    },
-    [info?.time, setPoints]
-  );
-
-  const deleteMarker = useCallback(
-    (id) => {
-      axios.delete(`/locations/${id}`).then((res) => {
-        setAddDescription(false);
-        setInfo(null);
-        setPoints([...res.data]);
-      });
-    },
-    [setPoints]
-  );
-
-  const vaildateUsersPin = useCallback((user, info) => {
-    return user.id === info.user_id ? true : false;
-  }, []);
-
   const mapReference = useRef();
   const onMapLoad = useCallback((map) => {
     mapReference.current = map;
@@ -178,15 +120,12 @@ const Map = ({ points, setPoints, user, changeStyle, style, setStyle }) => {
           setAddDescription={setAddDescription}
           info={info}
           setInfo={setInfo}
-          vaildateUsersPin={vaildateUsersPin}
           user={user}
           isPublic={isPublic}
           setIsPublic={setIsPublic}
-          handlePublicSwitch={handlePublicSwitch}
-          deleteMarker={deleteMarker}
           state={state}
           setState={setState}
-          editMarker={editMarker}
+          setPoints={setPoints}
         />
       </GoogleMap>
       <UserDashboard

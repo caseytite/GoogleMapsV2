@@ -1,5 +1,7 @@
+import { useCallback } from "react";
 import { InfoWindow } from "@react-google-maps/api";
 import InfoWindowForm from "./InfoWindowForm";
+import axios from "axios";
 
 const Window = ({
   addDescription,
@@ -7,15 +9,69 @@ const Window = ({
   info,
   setInfo,
   user,
-  vaildateUsersPin,
   isPublic,
   setIsPublic,
-  handlePublicSwitch,
-  deleteMarker,
   state,
   setState,
-  editMarker,
+  setPoints,
 }) => {
+  const editMarker = useCallback(
+    (title, description, id, tags) => {
+      axios
+        .put(`/locations/${id}`, { title, description, tags })
+        .then((res) => {
+          setAddDescription(false);
+          setState((prev) => ({
+            title: "",
+            description: "",
+            tags: "",
+          }));
+
+          return res;
+        })
+        .then((res) => {
+          setInfo(null);
+          setPoints((prev) => [
+            ...prev.filter((marker) => marker.time !== info.time),
+            ...res.data,
+          ]);
+          setInfo(...res.data);
+        });
+    },
+    [info?.time, setPoints]
+  );
+
+  const handlePublicSwitch = useCallback(
+    (id) => {
+      axios
+        .patch(`/locations/${id.id}`)
+        .then((res) => {
+          setPoints((prev) => [
+            ...prev.filter((point) => point.id !== id.id),
+            res.data[0],
+          ]);
+          return res.data[0];
+        })
+        .then((res) => setIsPublic(res.ispublic))
+        .catch((e) => console.log(e, "Fail"));
+    },
+    [setIsPublic, setPoints]
+  );
+
+  const vaildateUsersPin = useCallback((user, info) => {
+    return user.id === info.user_id ? true : false;
+  }, []);
+  const deleteMarker = useCallback(
+    (id) => {
+      axios.delete(`/locations/${id}`).then((res) => {
+        setAddDescription(false);
+        setInfo(null);
+        setPoints([...res.data]);
+      });
+    },
+    [setPoints]
+  );
+
   return (
     <>
       {info ? (
