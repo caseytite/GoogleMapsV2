@@ -13,6 +13,7 @@ import Input from "../components/UI/Input";
 import { Switch } from "@mui/material";
 import UserDashboard from "../components/UserDashboard";
 import InfoWindowForm from "../components/InfoWindowForm";
+import Window from "../components/InfoWindow";
 
 const mapContainerStyle = {
   width: "100vw",
@@ -171,7 +172,6 @@ const Map = ({ points, setPoints, user, changeStyle, style, setStyle }) => {
   return (
     <div className="map-container">
       <Search moveTo={moveTo} />
-
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={12}
@@ -181,31 +181,21 @@ const Map = ({ points, setPoints, user, changeStyle, style, setStyle }) => {
         options={options}
       >
         {usersPins}
-
-        {info ? (
-          <InfoWindow
-            position={{ lat: +info.lat, lng: +info.lng }}
-            onCloseClick={() => {
-              setInfo(null);
-              setAddDescription(false);
-            }}
-          >
-            <InfoWindowForm
-              addDescription={addDescription}
-              setAddDescription={setAddDescription}
-              info={info}
-              vaildateUsersPin={vaildateUsersPin}
-              user={user}
-              isPublic={isPublic}
-              setIsPublic={setIsPublic}
-              handlePublicSwitch={handlePublicSwitch}
-              deleteMarker={deleteMarker}
-              state={state}
-              setState={setState}
-              editMarker={editMarker}
-            />
-          </InfoWindow>
-        ) : null}
+        <Window
+          addDescription={addDescription}
+          setAddDescription={setAddDescription}
+          info={info}
+          setInfo={setInfo}
+          vaildateUsersPin={vaildateUsersPin}
+          user={user}
+          isPublic={isPublic}
+          setIsPublic={setIsPublic}
+          handlePublicSwitch={handlePublicSwitch}
+          deleteMarker={deleteMarker}
+          state={state}
+          setState={setState}
+          editMarker={editMarker}
+        />
       </GoogleMap>
       <UserDashboard
         style={style}
