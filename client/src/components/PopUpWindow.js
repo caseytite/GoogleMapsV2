@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import { InfoWindow } from "@react-google-maps/api";
 import InfoWindowForm from "./InfoWindowForm";
+
 import axios from "axios";
 
 const PopUpWindow = ({
@@ -13,6 +14,7 @@ const PopUpWindow = ({
   setIsPublic,
   state,
   setState,
+  points,
   setPoints,
 }) => {
   const editMarker = useCallback(
@@ -95,6 +97,7 @@ const PopUpWindow = ({
             state={state}
             setState={setState}
             editMarker={editMarker}
+            points={points}
           />
         </InfoWindow>
       ) : null}
