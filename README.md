@@ -36,5 +36,6 @@ Use Mapps! to search the globe and if you get lost, find yourself!
 - [x] Rate Locations
 - [x] Mobile Responsive Platform
 - [] Flag pins
+- [] Remake With TypeScript + Python
 
 ###### Gifs and Pictures coming soon
