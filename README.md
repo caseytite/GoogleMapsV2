@@ -23,18 +23,18 @@ Use Mapps! to search the globe and if you get lost, find yourself!
 
 ### Working on
 
-[X] Login/Logout + Create Accounts
-[X] Password hashing
-[X] Save your location pins
-[X] Add / Update pin title,tags or descriptions
-[X] Delete pins
-[X] Toggle your pins private or public
-[X] Search the world for locations
-[X] Locate youself button
-[X] Filter pins by title or tags
-[X] Multiple Map Themes with the click of a button
-[X] Rate Locations
-[X] Mobile Responsive Platform
-[] Flag pins
+- [x] Login/Logout + Create Accounts
+- [x] Password hashing
+- [x] Save your location pins
+- [x] Add / Update pin title,tags or descriptions
+- [x] Delete pins
+- [x] Toggle your pins private or public
+- [x] Search the world for locations
+- [x] Locate youself button
+- [x] Filter pins by title or tags
+- [x] Multiple Map Themes with the click of a button
+- [x] Rate Locations
+- [x] Mobile Responsive Platform
+- [] Flag pins
 
 ###### Gifs and Pictures coming soon
