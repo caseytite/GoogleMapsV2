@@ -16,9 +16,7 @@ const InfoWindowForm = ({
   setState,
   editMarker,
   setPoints,
-  points,
 }) => {
-  console.log("iwf", points);
   return (
     <div>
       {!addDescription && (

@@ -1,17 +1,17 @@
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 import axios from "axios";
 
 export default function HalfRating({ rating, id, setPoints }) {
-  console.log(id);
-  const updateRating = useCallback((rating, id) => {
-    axios.patch(`/locations/rating/${id}`, { rating }).then((res) => {
-      console.log(res.data);
-      setPoints((prev) => [...prev.filter((p) => p.id !== id), ...res.data]);
-    });
-  });
-  console.log(rating);
+  const updateRating = useCallback(
+    (rating, id) => {
+      axios.patch(`/locations/rating/${id}`, { rating }).then((res) => {
+        setPoints((prev) => [...prev.filter((p) => p.id !== id), ...res.data]);
+      });
+    },
+    [setPoints]
+  );
   return (
     <Stack spacing={1}>
       <Rating
