@@ -3,6 +3,7 @@ import Search from "../components/Search";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import "@reach/combobox/styles.css";
 import "../styles/Map.css";
+
 import axios from "axios";
 import UserDashboard from "../components/UserDashboard";
 import PopUpWindow from "../components/PopUpWindow";
@@ -125,6 +126,7 @@ const Map = ({ points, setPoints, user, changeStyle, style, setStyle }) => {
           setIsPublic={setIsPublic}
           state={state}
           setState={setState}
+          points={points}
           setPoints={setPoints}
         />
       </GoogleMap>

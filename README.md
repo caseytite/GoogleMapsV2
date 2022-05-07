@@ -17,12 +17,24 @@ Use Mapps! to search the globe and if you get lost, find yourself!
 - Search the world for locations
 - Locate youself button
 - Filter pins by title or tags
-- Map Theme changing
+- Multiple Map Themes with the click of a button
+- Rate Locations
+- Mobile Responsive Platform
 
 ### Working on
 
-- Pin Ratings
-- Flag pins
-- Mobile responsive
+[X] Login/Logout + Create Accounts
+[X] Password hashing
+[X] Save your location pins
+[X] Add / Update pin title,tags or descriptions
+[X] Delete pins
+[X] Toggle your pins private or public
+[X] Search the world for locations
+[X] Locate youself button
+[X] Filter pins by title or tags
+[X] Multiple Map Themes with the click of a button
+[X] Rate Locations
+[X] Mobile Responsive Platform
+[] Flag pins
 
 ###### Gifs and Pictures coming soon

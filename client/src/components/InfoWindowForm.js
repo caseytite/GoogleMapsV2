@@ -1,5 +1,7 @@
 import { Switch } from "@mui/material";
 import Input from "./UI/Input";
+import LocationRating from "../components/LocationRating";
+
 const InfoWindowForm = ({
   addDescription,
   setAddDescription,
@@ -13,11 +15,17 @@ const InfoWindowForm = ({
   state,
   setState,
   editMarker,
+  setPoints,
 }) => {
   return (
     <div>
       {!addDescription && (
         <div>
+          <LocationRating
+            rating={info.rating}
+            id={info.id}
+            setPoints={setPoints}
+          />
           <h2>{!info.title ? "Your new pin!" : info.title} </h2>
           <p>Created {new Date(info.time).toDateString()}</p>
           {info.description && <p>{info.description}</p>}
