@@ -69,7 +69,7 @@ const Window = ({
         setPoints([...res.data]);
       });
     },
-    [setPoints, setAddDescription]
+    [setPoints, setAddDescription, setInfo]
   );
 
   return (
