@@ -38,7 +38,7 @@ const Window = ({
           setInfo(...res.data);
         });
     },
-    [info?.time, setPoints]
+    [info?.time, setPoints, setAddDescription, setInfo, setState]
   );
 
   const handlePublicSwitch = useCallback(
@@ -69,7 +69,7 @@ const Window = ({
         setPoints([...res.data]);
       });
     },
-    [setPoints]
+    [setPoints, setAddDescription]
   );
 
   return (
