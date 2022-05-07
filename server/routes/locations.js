@@ -38,8 +38,6 @@ module.exports = (db) => {
   });
 
   router.patch("/rating/:id", (req, res) => {
-    console.log("params", req.params.id);
-    console.log("body", +req.body.rating);
     const rating = req.body?.rating ? req.body.rating : 2.5;
     db.query(
       `UPDATE locations
@@ -49,7 +47,6 @@ module.exports = (db) => {
       [+rating, req.params.id]
     )
       .then((data) => {
-        console.log("data", data);
         res.json(data.rows);
       })
       .catch((e) => console.log(e.message));
