@@ -1,18 +1,10 @@
 import React, { useState, useCallback, useRef } from "react";
 import Search from "../components/Search";
-import {
-  GoogleMap,
-  useLoadScript,
-  Marker,
-  InfoWindow,
-} from "@react-google-maps/api";
+import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import "@reach/combobox/styles.css";
 import "../styles/Map.css";
 import axios from "axios";
-import Input from "../components/UI/Input";
-import { Switch } from "@mui/material";
 import UserDashboard from "../components/UserDashboard";
-import InfoWindowForm from "../components/InfoWindowForm";
 import Window from "../components/InfoWindow";
 
 const mapContainerStyle = {
