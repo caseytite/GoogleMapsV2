@@ -17,6 +17,7 @@ const PopUpWindow = ({
   points,
   setPoints,
 }) => {
+  // console.log(points);
   const editMarker = useCallback(
     (title, description, id, tags) => {
       axios
@@ -97,6 +98,7 @@ const PopUpWindow = ({
             state={state}
             setState={setState}
             editMarker={editMarker}
+            setPoints={setPoints}
             points={points}
           />
         </InfoWindow>

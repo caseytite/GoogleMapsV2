@@ -15,13 +15,19 @@ const InfoWindowForm = ({
   state,
   setState,
   editMarker,
+  setPoints,
   points,
 }) => {
+  console.log("iwf", points);
   return (
     <div>
       {!addDescription && (
         <div>
-          <LocationRating rating={points.rating} />
+          <LocationRating
+            rating={info.rating}
+            id={info.id}
+            setPoints={setPoints}
+          />
           <h2>{!info.title ? "Your new pin!" : info.title} </h2>
           <p>Created {new Date(info.time).toDateString()}</p>
           {info.description && <p>{info.description}</p>}
