@@ -37,9 +37,9 @@ const UserDashboard = ({
       <div className="point-info">
         {info?.title && <h2>{info.title}</h2>}
         {info?.description && <h4>Description</h4>}
-        {info?.description && <p>Description: {info.description}</p>}
+        {info?.description && <p>{info.description}</p>}
         {info?.tags && <h4>Tags </h4>}
-        {info?.tags && <p>Tags: {info.tags}</p>}
+        {info?.tags && <p>{info.tags.split(" ").join()}</p>}
       </div>
     </>
   );

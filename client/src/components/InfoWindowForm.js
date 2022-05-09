@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Switch } from "@mui/material";
 import Input from "./UI/Input";
 import LocationRating from "../components/LocationRating";
@@ -18,7 +18,15 @@ const InfoWindowForm = ({
   editMarker,
   setPoints,
 }) => {
+  const [error, setError] = useState("");
   const rating = info.rating / info.numberofratings;
+  const handleSubmit = () => {
+    if (state.title && state.description && state.tags) {
+      editMarker(state.title, state.description, info.id, state.tags);
+    } else {
+      setError("Missing Field");
+    }
+  };
   return (
     <div>
       {!addDescription && (
@@ -92,23 +100,10 @@ const InfoWindowForm = ({
             required={true}
           />
           <div className="edit-delete">
-            <button
-              onClick={() => {
-                state.title &&
-                  state.description &&
-                  state.tags &&
-                  editMarker(
-                    state.title,
-                    state.description,
-                    info.id,
-                    state.tags
-                  );
-              }}
-            >
-              Save
-            </button>
+            <button onClick={handleSubmit}>Save</button>
             <button onClick={() => deleteMarker(info.id)}>Delete</button>
           </div>
+          {error && <p>{error}</p>}
         </div>
       )}
     </div>
