@@ -620,5 +620,5 @@ const midNight = [
   },
 ];
 
-const mapStyles = [styles, altStyle, assasinsCreed, midNight];
+const mapStyles = [midNight, styles, altStyle, assasinsCreed];
 export default mapStyles;

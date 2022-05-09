@@ -36,7 +36,7 @@ const Header = ({ user, style }) => {
       }
       return [bgColor, textColor, iconColor];
     }
-    return ["hsl(198deg 100% 43%)", "black", "hsl(83deg 67% 60%)"];
+    return ["none", "black", "hsl(83deg 67% 60%)"];
   };
 
   return (
@@ -53,7 +53,11 @@ const Header = ({ user, style }) => {
               Hello {user.first_name}!
             </h2>
           )}
-          {!user && <h1 onClick={handleLanding}>Mapps!</h1>}
+          {!user && (
+            <h1 style={{ color: "white" }} onClick={handleLanding}>
+              Mapps!
+            </h1>
+          )}
           <AddLocationAltIcon
             sx={{
               fontSize: "xxx-large",

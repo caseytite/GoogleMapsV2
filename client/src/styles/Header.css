@@ -1,6 +1,6 @@
 .header-container {
-  background-color: var(--header-blue);
-  border-bottom: 2px solid rgb(201, 195, 195);
+  /* background-color: var(--header-blue); */
+  /* border-bottom: 2px solid rgb(201, 195, 195); */
 }
 .header {
   display: flex;
