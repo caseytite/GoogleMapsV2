@@ -31,7 +31,6 @@ module.exports = (db) => {
         [email.toLowerCase()]
       )
         .then((data) => {
-          // console.log("db password", data.rows[0].password);
           if (data) {
             const validPassword = bcrypt.compareSync(
               password,
@@ -81,7 +80,6 @@ module.exports = (db) => {
   router.post("/register", (req, res) => {
     const { email, password, firstName, lastName } = req.body;
     const hash = bcrypt.hashSync(password, 10);
-    // console.log("reg hash", hash);
     db.query(
       `INSERT INTO users (first_name,last_name,email,password)
       VALUES ($1,$2,$3,$4) RETURNING *`,

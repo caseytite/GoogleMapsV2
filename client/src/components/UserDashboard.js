@@ -34,9 +34,11 @@ const UserDashboard = ({
         </div>
       </div>
       <hr />
-      {info?.title && <p>{info.title}</p>}
-      {info?.description && <p>{info.description}</p>}
-      {info?.tags && <p>{info.tags}</p>}
+      <div className="point-info">
+        {info?.title && <h2>{info.title}</h2>}
+        {info?.description && <p>{info.description}</p>}
+        {info?.tags && <p>{info.tags}</p>}
+      </div>
     </>
   );
 };

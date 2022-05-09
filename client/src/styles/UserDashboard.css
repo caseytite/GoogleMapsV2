@@ -36,8 +36,16 @@ hr {
   border: 1px solid rgb(201, 195, 195);
   width: 99%;
 }
+.point-info {
+  margin-left: 2em;
+  margin-bottom: 5em;
+}
 
 @media (max-width: 580px) {
+  .location-filter > h2 {
+    font-size: large;
+    margin-left: 0;
+  }
   .btn-container {
     flex-direction: column;
   }
