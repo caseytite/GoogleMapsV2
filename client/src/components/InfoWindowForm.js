@@ -114,4 +114,4 @@ const InfoWindowForm = ({
     </div>
   );
 };
-export default React.memo(InfoWindowForm);
+export default InfoWindowForm;

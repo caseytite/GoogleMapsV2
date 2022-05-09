@@ -40,6 +40,12 @@ hr {
   margin-left: 2em;
   margin-bottom: 5em;
 }
+.point-info > h4 {
+  margin-bottom: 0;
+}
+.point-info > p {
+  margin-top: 5px;
+}
 
 @media (max-width: 580px) {
   .location-filter > h2 {
