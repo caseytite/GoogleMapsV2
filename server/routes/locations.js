@@ -38,13 +38,12 @@ module.exports = (db) => {
   });
 
   router.patch("/rating/:id", (req, res) => {
-    const rating = req.body?.rating ? req.body.rating : 2.5;
     db.query(
       `UPDATE locations
-        SET rating = $1
+        SET(rating,numberofratings) = ((SELECT rating from locations WHERE id = $2)+ $1,(SELECT numberofratings from locations WHERE id = $2)+1)
         WHERE id = $2 RETURNING *;
         `,
-      [+rating, req.params.id]
+      [+req.body.rate, req.params.id]
     )
       .then((data) => {
         res.json(data.rows);

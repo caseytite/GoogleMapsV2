@@ -1,3 +1,4 @@
+import React from "react";
 import { Switch } from "@mui/material";
 import Input from "./UI/Input";
 import LocationRating from "../components/LocationRating";
@@ -17,13 +18,15 @@ const InfoWindowForm = ({
   editMarker,
   setPoints,
 }) => {
+  const rating = info.rating / info.numberofratings;
   return (
     <div>
       {!addDescription && (
         <div>
           <LocationRating
-            rating={info.rating}
+            rating={rating}
             id={info.id}
+            point={info}
             setPoints={setPoints}
           />
           <h2>{!info.title ? "Your new pin!" : info.title} </h2>
@@ -111,4 +114,4 @@ const InfoWindowForm = ({
     </div>
   );
 };
-export default InfoWindowForm;
+export default React.memo(InfoWindowForm);

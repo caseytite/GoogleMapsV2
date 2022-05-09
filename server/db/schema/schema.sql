@@ -19,5 +19,6 @@ CREATE TABLE locations (
   title VARCHAR(255) NOT NULL DEFAULT 'New Pin',
   tags VARCHAR(255) DEFAULT 'tag',
   isPublic BOOLEAN DEFAULT FALSE,
-  rating FlOAT DEFAULT 2.5
+  rating FlOAT DEFAULT 0,
+  numberofratings INTEGER DEFAULT 0 
 );
