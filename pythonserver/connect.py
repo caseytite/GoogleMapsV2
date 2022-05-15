@@ -22,8 +22,9 @@ def connect():
         
         @app.route('/users')
         def users():
-            cur.execute('SELECT * from users;')
-            users = cur.fetchall()
+            cur.execute(f'SELECT * from users;')
+            users = cur.fetchone()
+           
             return {"users":[users]}
         
         @app.route('/loc')
