@@ -1,5 +1,6 @@
 const styles = [
   {
+    id: 4,
     stylers: [
       {
         saturation: -100,
@@ -63,6 +64,7 @@ const styles = [
 ];
 const altStyle = [
   {
+    id: 3,
     featureType: "all",
     elementType: "labels.text",
     stylers: [
@@ -119,6 +121,7 @@ const altStyle = [
 ];
 const assasinsCreed = [
   {
+    id: 2,
     featureType: "all",
     elementType: "all",
     stylers: [
@@ -484,6 +487,7 @@ const assasinsCreed = [
 ];
 const midNight = [
   {
+    id: 1,
     featureType: "all",
     elementType: "labels.text.fill",
     stylers: [

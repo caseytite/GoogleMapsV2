@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { LoggedInUser } from "../../context/AuthContext";
 import Button from "./Button";
 import "../../styles/Header.css";
 import axios from "axios";
 import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
 import { useNavigate } from "react-router-dom";
+import useWaterColor from "../../hooks/useWaterColor";
 
 const Header = ({ user, style }) => {
+  const loggedInUser = useContext(LoggedInUser);
   const navigate = useNavigate();
+  const [userLoaded, setUserLoaded] = useState(user);
+  const findWaterColor = useWaterColor();
+  const [backgroundColor, logoColor, iconColor] = findWaterColor;
+
+  useEffect(() => {
+    if (user?.first_name) {
+      setUserLoaded(user);
+    }
+  }, [user]);
 
   const goToLogin = () => {
     navigate("/login");
@@ -17,43 +29,26 @@ const Header = ({ user, style }) => {
   };
 
   const handleLogout = () => {
-    localStorage.clear();
+    loggedInUser.logout();
     navigate("/");
     axios.post("/user/logout");
-  };
-
-  const findWaterColor = (style) => {
-    if (style) {
-      const waterColor = style.filter((sty) => sty.featureType === "water");
-      const bgColor = waterColor[0].stylers[0].color;
-      let textColor = "black";
-      if ((bgColor[1] === "0" && bgColor[2] !== "0") || bgColor[1] === "2") {
-        textColor = "whitesmoke";
-      }
-      let iconColor = "hsl(83deg 67% 60%)";
-      if (bgColor[1] === "a") {
-        iconColor = "hsl(136deg 53% 43%)";
-      }
-      return [bgColor, textColor, iconColor];
-    }
-    return ["none", "black", "hsl(83deg 67% 60%)"];
   };
 
   return (
     <div
       className="header-container"
       style={{
-        backgroundColor: `${findWaterColor(style)[0]}`,
+        backgroundColor: `${backgroundColor}`,
       }}
     >
       <header className="header">
         <div className="title">
-          {user && (
-            <h2 style={{ color: `${findWaterColor(style)[1]}` }}>
-              Hello {user.first_name}!
+          {userLoaded && (
+            <h2 style={{ color: `${logoColor}` }}>
+              Hello {userLoaded.first_name}!
             </h2>
           )}
-          {!user && (
+          {!userLoaded && (
             <h1 style={{ color: "white" }} onClick={handleLanding}>
               Mapps!
             </h1>
@@ -61,16 +56,16 @@ const Header = ({ user, style }) => {
           <AddLocationAltIcon
             sx={{
               fontSize: "xxx-large",
-              color: `${findWaterColor(style)[2]}`,
+              color: `${iconColor}`,
             }}
           />
         </div>
-        {user && (
+        {userLoaded && (
           <div className="user-name">
             <Button onClick={handleLogout}>Logout</Button>
           </div>
         )}
-        {!user && <Button onClick={goToLogin}>Login</Button>}
+        {!userLoaded && <Button onClick={goToLogin}>Login</Button>}
       </header>
     </div>
   );

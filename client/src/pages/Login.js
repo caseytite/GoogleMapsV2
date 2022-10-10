@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { LoggedInUser } from "../context/AuthContext";
 import axios from "axios";
 import Button from "../components/UI/Button";
 import Input from "../components/UI/Input";
@@ -8,6 +9,7 @@ import Header from "../components/UI/Header";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
 const Login = () => {
+  const loggedInUser = useContext(LoggedInUser);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -20,7 +22,8 @@ const Login = () => {
           if (res.error) {
             return;
           }
-          localStorage.setItem("userId", res.data.user.id);
+          loggedInUser.login(res.data.user.id);
+          // localStorage.setItem("userId", res.data.user.id);
         })
         .then(() => {
           navigate("/map");
