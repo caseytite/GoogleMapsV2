@@ -1,8 +1,13 @@
 .form-container {
   display: flex;
   justify-content: center;
-  margin-top: 120px;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  margin-bottom: 40px;
+  top: 100px;
 }
+
 .login {
   display: flex;
   flex-direction: column;
@@ -19,6 +24,7 @@
   border: var(--input-border);
   padding: 3px 10px;
 }
+
 .login > label {
   display: inline-block;
   align-self: flex-start;
@@ -27,6 +33,7 @@
   margin-bottom: 5px;
   color: var(--std-text);
 }
+
 .error {
   display: flex;
   justify-content: center;
@@ -34,14 +41,23 @@
   margin-top: 1em;
   color: var(--std-text);
 }
+
 .error > h3 {
   margin-left: 10px;
 }
+
 .login > button {
-  display: inline-block;
-  align-self: flex-start;
-  margin-left: -25px;
+  position: relative;
+  width: 245px;
+  margin-left: 0;
 }
+
+.login > button:hover {
+  position: relative;
+  width: 245px;
+  margin-left: 0;
+}
+
 .new-user {
   color: var(--std-text);
   display: flex;

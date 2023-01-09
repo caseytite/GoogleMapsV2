@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../components/UI/Header";
 import "../styles/Register.css";
 import Input from "../components/UI/Input";
 import Button from "../components/UI/Button";
 import axios from "axios";
 
-const Register = (props) => {
+const Register = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -23,9 +22,9 @@ const Register = (props) => {
         });
     }
   };
+
   return (
     <div className="bg-img">
-      <Header />
       <div className="reg-container">
         <form className="reg-form" onSubmit={(e) => e.preventDefault()}>
           <h1>Register!</h1>

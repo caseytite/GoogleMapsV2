@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Switch } from "@mui/material";
 import Input from "./UI/Input";
+import { useNavigate } from "react-router-dom";
 import LocationRating from "../components/LocationRating";
 
 const InfoWindowForm = ({
@@ -20,6 +21,8 @@ const InfoWindowForm = ({
 }) => {
   const [error, setError] = useState("");
   const rating = info.rating / info.numberofratings;
+  const navigate = useNavigate();
+
   const handleSubmit = () => {
     if (state.title && state.description && state.tags) {
       editMarker(state.title, state.description, info.id, state.tags);
@@ -27,6 +30,11 @@ const InfoWindowForm = ({
       setError("Missing Field");
     }
   };
+
+  const handleFullDetails = (id) => {
+    navigate(`/full-details`, { state: { id } });
+  };
+
   return (
     <div>
       {!addDescription && (
@@ -40,15 +48,23 @@ const InfoWindowForm = ({
           <h2>{!info.title ? "Your new pin!" : info.title} </h2>
           <p>Created {new Date(info.time).toDateString()}</p>
           {info.description && <p>{info.description}</p>}
-          {vaildateUsersPin(user, info) && (
-            <button
-              onClick={() =>
-                setAddDescription(true) && setIsPublic(info.ispublic)
-              }
+          <span style={{ display: "flex", flexDirection: "column" }}>
+            <div
+              onClick={() => handleFullDetails(info.id)}
+              style={{ marginBottom: "5px" }}
             >
-              Edit Details
-            </button>
-          )}
+              Full Details
+            </div>
+            {vaildateUsersPin(user, info) && (
+              <button
+                onClick={() =>
+                  setAddDescription(true) && setIsPublic(info.ispublic)
+                }
+              >
+                Edit Details
+              </button>
+            )}
+          </span>
         </div>
       )}
       {addDescription && (

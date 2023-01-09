@@ -5,7 +5,6 @@ import Button from "../components/UI/Button";
 import Input from "../components/UI/Input";
 import "../styles/Login.css";
 import { useNavigate } from "react-router-dom";
-import Header from "../components/UI/Header";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
 const Login = () => {
@@ -38,7 +37,6 @@ const Login = () => {
   };
   return (
     <div className="bg-img">
-      <Header />
       <div className="form-container">
         <form className="login" action="" onSubmit={(e) => e.preventDefault()}>
           <label htmlFor="email">Email</label>
@@ -61,23 +59,22 @@ const Login = () => {
           />
           <Button onClick={handleLogin}>Sign in</Button>
         </form>
-      </div>
-      {error && (
-        <span className="error">
-          <>
-            <ErrorOutlineIcon sx={{ color: "red", fontSize: "xx-large" }} />{" "}
-            <h3>{error}</h3>
-          </>
-        </span>
-      )}
-
-      <div className="new-user">
-        <h3>
-          First Time ?{" "}
-          <span className="reg-link" onClick={handleRegister}>
-            Register Now!
+        {error && (
+          <span className="error">
+            <>
+              <ErrorOutlineIcon sx={{ color: "red", fontSize: "xx-large" }} />{" "}
+              <h3>{error}</h3>
+            </>
           </span>
-        </h3>
+        )}
+        <div className="new-user">
+          <h3>
+            First Time ?{" "}
+            <span className="reg-link" onClick={handleRegister}>
+              Register Now!
+            </span>
+          </h3>
+        </div>
       </div>
     </div>
   );

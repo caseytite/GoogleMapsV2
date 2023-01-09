@@ -90,5 +90,16 @@ module.exports = (db) => {
     });
   });
 
+  router.get("/full-details/:id", (req, res) => {
+    console.log("params", req.params, "body", req.body);
+    db.query(
+      `SELECT * FROM locations
+      WHERE id = $1;`,
+      [req.params.id]
+    ).then((data) => {
+      res.json(data.rows[0]);
+    });
+  });
+
   return router;
 };

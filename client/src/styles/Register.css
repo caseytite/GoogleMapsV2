@@ -1,13 +1,14 @@
 .reg-container {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
   color: var(--std-text);
 }
+
 .reg-form > h1 {
   font-size: xxx-large;
   text-decoration: underline;
 }
+
 .reg-form {
   display: flex;
   flex-direction: column;
@@ -24,6 +25,7 @@
   border: var(--input-border);
   padding: 3px 10px;
 }
+
 .reg-form > label {
   display: inline-block;
   align-self: flex-start;
@@ -31,10 +33,17 @@
   margin-left: -25px;
   margin-bottom: 5px;
 }
+
 .reg-form > button {
-  display: inline-block;
-  align-self: flex-start;
-  margin-left: -25px;
+  position: relative;
+  width: 245px;
+  margin-left: 0;
+}
+
+.reg-form > button:hover {
+  position: relative;
+  width: 245px;
+  margin-left: 0;
 }
 
 @media (max-height: 680px) {

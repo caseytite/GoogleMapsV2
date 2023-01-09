@@ -1,11 +1,9 @@
-import Header from "../components/UI/Header";
 import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
 import "../styles/Landing.css";
+
 const Landing = () => {
   return (
     <div className="bg-img">
-      <Header />
-
       <div className="welcome">
         <h1>
           Welcome to <u>Mapps!</u>

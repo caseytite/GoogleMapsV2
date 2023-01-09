@@ -5,13 +5,19 @@ import Stack from "@mui/material/Stack";
 import axios from "axios";
 
 const HalfRating = ({ rating, id, setPoints, point }) => {
+  console.log("rating, id, setPoints, point", rating, id, setPoints, point);
   const [numOfRatings, setNumofRatings] = useState(point.numberofratings);
   const updateRating = useCallback(
     (rate, id) => {
       if (!rate) return;
       axios.patch(`/locations/rating/${id}`, { rate }).then((res) => {
-        setPoints((prev) => [...prev.filter((p) => p.id !== id), ...res.data]);
         setNumofRatings(res.data[0].numberofratings);
+        if (setPoints) {
+          setPoints((prev) => [
+            ...prev.filter((p) => p.id !== id),
+            ...res.data,
+          ]);
+        }
       });
     },
     [setPoints]

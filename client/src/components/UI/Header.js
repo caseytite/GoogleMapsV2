@@ -7,18 +7,18 @@ import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
 import { useNavigate } from "react-router-dom";
 import useWaterColor from "../../hooks/useWaterColor";
 
-const Header = ({ user, style }) => {
+const Header = () => {
   const loggedInUser = useContext(LoggedInUser);
   const navigate = useNavigate();
-  const [userLoaded, setUserLoaded] = useState(user);
+  const [userLoaded, setUserLoaded] = useState();
   const findWaterColor = useWaterColor();
   const [backgroundColor, logoColor, iconColor] = findWaterColor;
 
   useEffect(() => {
-    if (user?.first_name) {
-      setUserLoaded(user);
+    if (loggedInUser.user?.first_name) {
+      setUserLoaded(loggedInUser.user);
     }
-  }, [user]);
+  }, [loggedInUser]);
 
   const goToLogin = () => {
     navigate("/login");

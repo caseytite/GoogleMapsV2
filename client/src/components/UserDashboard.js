@@ -35,11 +35,17 @@ const UserDashboard = ({
       </div>
       <hr />
       <div className="point-info">
-        {info?.title && <h2>{info.title}</h2>}
-        {info?.description && <h4>Description</h4>}
-        {info?.description && <p>{info.description}</p>}
-        {info?.tags && <h4>Tags </h4>}
-        {info?.tags && <p>{info.tags.split(" ").join()}</p>}
+        {info?.title ? (
+          <>
+            {info?.title && <h2>{info.title}</h2>}
+            {info?.description && <h4>Description</h4>}
+            {info?.description && <p>{info.description}</p>}
+            {info?.tags && <h4>Tags </h4>}
+            {info?.tags && <p>{info.tags.split(" ").join()}</p>}
+          </>
+        ) : (
+          <h3>Choose a location to view Info</h3>
+        )}
       </div>
     </>
   );

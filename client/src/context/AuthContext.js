@@ -1,4 +1,5 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
+import axios from "axios";
 import mapStyles from "../mapStyles/mapStyles";
 
 export const LoggedInUser = createContext({
@@ -8,6 +9,7 @@ export const LoggedInUser = createContext({
   changeStyle: () => {},
   login: () => {},
   logout: () => {},
+  user: "",
 });
 
 const LoggedInUserProvider = (props) => {
@@ -15,6 +17,13 @@ const LoggedInUserProvider = (props) => {
     localStorage.getItem("userId") || false
   );
   const [style, setStyle] = useState(mapStyles[0]);
+  const [user, setUser] = useState([]);
+
+  useEffect(() => {
+    axios.get("/user").then((res) => {
+      setUser(res.data.data[0]);
+    });
+  }, []);
 
   const changeStyleHandler = (styles) => {
     const removeStyle = styles.shift();
@@ -23,13 +32,16 @@ const LoggedInUserProvider = (props) => {
   };
 
   const logInHandler = (userId) => {
+    window.location.assign("/map");
     localStorage.setItem("userId", userId);
     setIsLoggedIn(true);
   };
 
   const logOutHandler = () => {
+    window.location.assign("/");
     localStorage.clear();
     setIsLoggedIn(false);
+    setUser({});
   };
 
   return (
@@ -40,6 +52,7 @@ const LoggedInUserProvider = (props) => {
         loggedIn,
         changeStyle: changeStyleHandler,
         style,
+        user,
       }}
     >
       {props.children}
